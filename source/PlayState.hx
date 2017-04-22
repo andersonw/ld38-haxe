@@ -1,36 +1,26 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.math.FlxMath;
-import flixel.group.FlxGroup;
-import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
-import flixel.ui.FlxButton;
-import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
 	private var _player:Player;
-	private var _grpWalls:FlxTypedGroup<Wall>;
+	private var _level:Level;
 
 	override public function create():Void
 	{
-		_player = new Player(20,20);
-		add(_player);
+		_level = new Level("assets/data/levels/test_level.tmx");
+		add(_level.floors);
+		add(_level.walls);
 
-		// add some random walls
-		
-		_grpWalls = new FlxTypedGroup<Wall>();
-		for(i in 0...30){
-			var wall = new Wall(FlxG.random.float(0., 600.),
-								 FlxG.random.float(0., 600.),
-								 FlxG.random.int(20, 30),
-								 FlxG.random.int(20, 30));
-			_grpWalls.add(wall);
-		}
-		add(_grpWalls);
+		_player = new Player(_level.spawn.x, _level.spawn.y);
+		add(_player);
+		FlxG.camera.setScrollBoundsRect(-10, -10, _level.fullWidth+20, _level.fullHeight+20, true);
+		FlxG.camera.follow(_player);
+
+//		FlxG.worldBounds.set(-10, -10, _level.fullWidth+20, _level.fullHeight+20);
 		
 		super.create();
 	}
@@ -38,7 +28,11 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		FlxG.collide(_player, _grpWalls);
+		FlxG.collide(_player, _level.walls);
+		if(!FlxG.overlap(_player, _level.floors))
+		{
+			FlxTween.tween(_player, {x: _level.spawn.x, y: _level.spawn.y}, 0.5);
+		}
 
 		if(FlxG.keys.justPressed.Z)
 		{
@@ -54,30 +48,26 @@ class PlayState extends FlxState
 	// function to make the world smaller (and player larger in comparison)
 	public function scaleDown():Void
 	{
-		for(wall in _grpWalls)
+		for(wall in _level.walls)
 		{
-			FlxTween.tween(wall, {x: 0.5*(wall.x + _player.x), y:0.5*(wall.y + _player.y)}, 1);
-			FlxTween.tween(wall.scale, 
-						   {x: 0.5*wall.scale.x, y: 0.5*wall.scale.y}, 
-						   1, 
-						   {onComplete: function(tween:FlxTween){
-							   		wall.updateHitbox();
-						   	}});
+			wall.scaleDown(_player);
+		}
+		for(floor in _level.floors)
+		{
+			floor.scaleDown(_player);
 		}
 	}
 
 	// function to make the world larger (and player smaller in comparison)
 	public function scaleUp():Void
 	{
-		for(wall in _grpWalls)
+		for(wall in _level.walls)
 		{
-			FlxTween.tween(wall, {x: 2*wall.x - _player.x, y:2*wall.y - _player.y}, 1);
-			FlxTween.tween(wall.scale, 
-						   {x: 2*wall.scale.x, y: 2*wall.scale.y}, 
-						   1, 
-						   {onComplete: function(tween:FlxTween){
-							   		wall.updateHitbox();
-						   	}});
+			wall.scaleUp(_player);
+		}
+		for(floor in _level.floors)
+		{
+			floor.scaleUp(_player);
 		}
 	}
 }

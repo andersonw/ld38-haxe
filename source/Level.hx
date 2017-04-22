@@ -8,20 +8,20 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 
 // adapted from https://github.com/HaxeFlixel/flixel-demos/blob/master/Editors/TiledEditor/source/TiledLevel.hx
-class TiledLevel extends TiledMap
+class Level extends TiledMap
 {
-    public var floorRects:FlxTypedGroup<Floor>;
-    public var wallRects:FlxTypedGroup<Wall>;
+    public var floors:FlxTypedGroup<Floor>;
+    public var walls:FlxTypedGroup<Wall>;
 
-    public var player:Player;
+    public var spawn:FlxPoint;
     public var endLocation:FlxPoint;
 
     public function new(levelPath:String)
     {
         super(levelPath);
 
-        floorRects = new FlxTypedGroup<Floor>();
-        wallRects = new FlxTypedGroup<Wall>();
+        floors = new FlxTypedGroup<Floor>();
+        walls = new FlxTypedGroup<Wall>();
 
         for (layer in layers)
         {
@@ -43,7 +43,7 @@ class TiledLevel extends TiledMap
         for (floorObj in floorLayer.objects)
         {
             var floorRect:Floor = new Floor(floorObj.x, floorObj.y, floorObj.width, floorObj.height);
-            floorRects.add(floorRect);
+            floors.add(floorRect);
         }
     }
 
@@ -52,7 +52,7 @@ class TiledLevel extends TiledMap
         for (wallObj in wallLayer.objects)
         {
             var wallRect:Wall = new Wall(wallObj.x, wallObj.y, wallObj.width, wallObj.height);
-            wallRects.add(wallRect);
+            walls.add(wallRect);
         }
     }
 
@@ -62,7 +62,7 @@ class TiledLevel extends TiledMap
         {
             if (locObj.name == "start")
             {
-                player = new Player(locObj.x, locObj.y);
+                spawn = new FlxPoint(locObj.x, locObj.y);
             }
             else if (locObj.name == "end")
             {

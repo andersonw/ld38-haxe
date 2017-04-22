@@ -7,7 +7,7 @@ import flixel.math.FlxPoint;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 
-class Wall extends FlxSprite
+class Wall extends ScalableSprite
 {
     public function new(?X:Float=0, ?Y:Float=0, ?width:Int=32, ?height:Int=32)
     {

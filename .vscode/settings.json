@@ -10,7 +10,7 @@
 		["export/windows/neko/haxe/release.hxml"],
 		["export/linux/cpp/haxe/debug.hxml"],
 		["export/linux/cpp/haxe/release.hxml"],
-		["export/linux/neko/haxe/debug.hxml"],
+		["export/linux64/neko/haxe/debug.hxml"],
 		["export/linux/neko/haxe/release.hxml"],
 		["export/mac/cpp/haxe/debug.hxml"],
 		["export/mac/cpp/haxe/release.hxml"],
