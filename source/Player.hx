@@ -1,13 +1,10 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
 import flixel.math.FlxPoint;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 
-class Player extends FlxSprite
+class Player extends ScalableSprite
 {
     public var speed:Float = 200;
     public function new(?X:Float=0, ?Y:Float=0)

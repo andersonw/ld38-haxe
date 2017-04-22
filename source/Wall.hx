@@ -1,10 +1,5 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 
 class Wall extends ScalableSprite

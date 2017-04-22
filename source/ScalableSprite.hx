@@ -1,11 +1,7 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
-import flixel.system.FlxAssets.FlxGraphicAsset;
-import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 
 class ScalableSprite extends FlxSprite
@@ -14,6 +10,19 @@ class ScalableSprite extends FlxSprite
     {
         super(X, Y);
     }   
+
+    public function containsSprite(sprite:FlxSprite):Bool
+    {
+        if(sprite.x < x)
+            return false;
+        if(sprite.x+sprite.width > x+width)
+            return false;
+        if(sprite.y < y)
+            return false;
+        if(sprite.y+sprite.height > y+height)
+            return false;
+        return true;
+    }
 
     public function scaleUp(target:FlxSprite)
     {
@@ -32,6 +41,7 @@ class ScalableSprite extends FlxSprite
                                 x = dilate.x;
                                 y = dilate.y;
                                 updateHitbox();
+                                target.active = true;
                         }});
     }
 
@@ -51,6 +61,7 @@ class ScalableSprite extends FlxSprite
                             x = midpoint.x;
                             y = midpoint.y;
                             updateHitbox();
+                            target.active = true;
                         }});
     }
 }
