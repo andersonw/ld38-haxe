@@ -9,9 +9,9 @@ import flixel.util.FlxColor;
 
 class Floor extends FlxSprite
 {
-    public function new(?X:Float=0, ?Y:Float=0, ?height:Int=32, ?width:Int=32)
+    public function new(?X:Float=0, ?Y:Float=0, ?width:Int=32, ?height:Int=32)
     {
         super(X, Y);
-        makeGraphic(height, width, FlxColor.GREEN);
+        makeGraphic(width, height, FlxColor.GREEN);
     }
 }

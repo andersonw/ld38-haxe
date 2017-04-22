@@ -42,7 +42,7 @@ class TiledLevel extends TiledMap
     {
         for (floorObj in floorLayer.objects)
         {
-            var floorRect:Floor = new Floor(floorObj.x, floorObj.y, floorObj.height, floorObj.width);
+            var floorRect:Floor = new Floor(floorObj.x, floorObj.y, floorObj.width, floorObj.height);
             floorRects.add(floorRect);
         }
     }
@@ -51,7 +51,7 @@ class TiledLevel extends TiledMap
     {
         for (wallObj in wallLayer.objects)
         {
-            var wallRect:Wall = new Wall(wallObj.x, wallObj.y, wallObj.height, wallObj.width);
+            var wallRect:Wall = new Wall(wallObj.x, wallObj.y, wallObj.width, wallObj.height);
             wallRects.add(wallRect);
         }
     }
