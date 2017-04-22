@@ -13,5 +13,6 @@ class Wall extends FlxSprite
     {
         super(X, Y);
         makeGraphic(height, width, FlxColor.BLUE);
+        immovable=true;
     }
 }
