@@ -23,11 +23,11 @@ class PlayState extends FlxState
 		// add some random walls
 		
 		_grpWalls = new FlxTypedGroup<Wall>();
-		for(i in 0...10){
+		for(i in 0...30){
 			var wall = new Wall(FlxG.random.float(0., 600.),
 								 FlxG.random.float(0., 600.),
-								 FlxG.random.int(20, 100),
-								 FlxG.random.int(20, 100));
+								 FlxG.random.int(20, 30),
+								 FlxG.random.int(20, 30));
 			_grpWalls.add(wall);
 		}
 		add(_grpWalls);
@@ -44,6 +44,11 @@ class PlayState extends FlxState
 		{
 			scaleDown();
 		}
+
+		if(FlxG.keys.justPressed.X)
+		{
+			scaleUp();
+		}
 	}
 
 	// function to make the world smaller (and player larger in comparison)
@@ -54,6 +59,21 @@ class PlayState extends FlxState
 			FlxTween.tween(wall, {x: 0.5*(wall.x + _player.x), y:0.5*(wall.y + _player.y)}, 1);
 			FlxTween.tween(wall.scale, 
 						   {x: 0.5*wall.scale.x, y: 0.5*wall.scale.y}, 
+						   1, 
+						   {onComplete: function(tween:FlxTween){
+							   		wall.updateHitbox();
+						   	}});
+		}
+	}
+
+	// function to make the world larger (and player smaller in comparison)
+	public function scaleUp():Void
+	{
+		for(wall in _grpWalls)
+		{
+			FlxTween.tween(wall, {x: 2*wall.x - _player.x, y:2*wall.y - _player.y}, 1);
+			FlxTween.tween(wall.scale, 
+						   {x: 2*wall.scale.x, y: 2*wall.scale.y}, 
 						   1, 
 						   {onComplete: function(tween:FlxTween){
 							   		wall.updateHitbox();
