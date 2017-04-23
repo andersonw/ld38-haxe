@@ -35,6 +35,13 @@ class Ball extends ScalableSprite
         velocity.y = 2*(targetCenter.y - myCenter.y);
     }
 
+    public override function getHelpText(player:Player):String
+    {
+        if (!player.isCarrying && !pickedUp)
+            return "Press [A] to pick up";
+        return "";
+    }
+
     public override function redraw(){
         FlxSpriteUtil.fill(this, FlxColor.TRANSPARENT);
         if(pickedUp)

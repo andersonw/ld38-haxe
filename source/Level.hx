@@ -61,6 +61,7 @@ class Level extends TiledMap
                         walls.add(cast levelObj);
                     case "Exits":
                         levelObj = new Exit(obj.x, obj.y);
+                        (cast levelObj).bins = bins;
                         exits.add(cast levelObj);
                     case "Coins":
                         levelObj = new Coin(obj.x, obj.y);
@@ -85,11 +86,18 @@ class Level extends TiledMap
                     levelObj.scale.set(Math.pow(2,levelObj.scaleFactor), Math.pow(2,levelObj.scaleFactor));
                     levelObj.updateHitbox();
                 }
-                levelObj.redraw(); // redraw things in case they depend on scaleFactor
-
             }
-
         }
+
+        // redraw everything
+        for(entityGroup in entityGroups)
+        {
+            for(obj in entityGroup)
+            {
+                obj.redraw();
+            }
+        }
+
     }
 
 }

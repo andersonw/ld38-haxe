@@ -2,6 +2,9 @@ package;
 
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
+import flixel.group.FlxGroup;
+
+using Lambda;
 
 class Exit extends ScalableSprite
 {
@@ -9,23 +12,34 @@ class Exit extends ScalableSprite
 
     public static var lineStyle:LineStyle = { color: FlxColor.RED, thickness: 10 };
 
+    public var bins:FlxTypedGroup<Bin>;
+
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
         makeGraphic(UNSCALED_SIZE, UNSCALED_SIZE, FlxColor.PURPLE);
     }
 
+    private function binsFull():Bool {
+        return Lambda.foreach(bins.members, 
+                                function(bin:Bin){
+                                    return bin.hasBall;
+                                });
+    }
+
     public function isOpen():Bool {
-        return (scaleFactor == 0);
+        return (scaleFactor == 0 && binsFull());
     }
 
     public function canExit(player:Player):Bool
     {
-        return (player.scaleFactor == scaleFactor && this.overlapsSprite(player));
+        return (player.scaleFactor == scaleFactor && binsFull());
     }
 
     public override function getHelpText(player:Player):String
     {
+        if (!binsFull())
+            return "Some bin is empty";
         if (player.scaleFactor < scaleFactor && this.overlapsSprite(player))
             return "You're too small!";
         if (player.scaleFactor > scaleFactor && player.overlapsSprite(this))
