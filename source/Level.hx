@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 
+
 // adapted from https://github.com/HaxeFlixel/flixel-demos/blob/master/Editors/TiledEditor/source/TiledLevel.hx
 class Level extends TiledMap
 {
@@ -16,6 +17,8 @@ class Level extends TiledMap
     public var scaleFloors:FlxTypedGroup<Floor>;
     public var walls:FlxTypedGroup<Wall>;
     public var exits:FlxTypedGroup<Exit>;
+
+    public var entityGroups:Array<FlxTypedGroup<Dynamic>>;
 
     public var spawn:FlxPoint;
 
@@ -27,6 +30,8 @@ class Level extends TiledMap
         scaleFloors = new FlxTypedGroup<Floor>();
         walls = new FlxTypedGroup<Wall>();
         exits = new FlxTypedGroup<Exit>();
+
+        entityGroups = [floors, scaleFloors, walls, exits];
 
         for (layer in layers)
         {

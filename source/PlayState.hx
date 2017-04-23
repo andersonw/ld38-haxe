@@ -22,10 +22,10 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		_level = new Level(_levelFile);
-		add(_level.floors);
-		add(_level.scaleFloors);
-		add(_level.walls);
-		add(_level.exits);
+		for(entityGroup in _level.entityGroups)
+		{
+			add(entityGroup);
+		}
 
 		_player = new Player(_level.spawn.x, _level.spawn.y);
 		add(_player);
@@ -82,21 +82,12 @@ class PlayState extends FlxState
 	public function scaleDown():Void
 	{
 		_player.active = false;
-		for(wall in _level.walls)
+		for(entityGroup in _level.entityGroups)
 		{
-			wall.scaleDown(_player);
-		}
-		for(floor in _level.floors)
-		{
-			floor.scaleDown(_player);
-		}
-		for(exit in _level.exits)
-		{
-			exit.scaleDown(_player);
-		}
-		for(scaleFloor in _level.scaleFloors)
-		{
-			scaleFloor.scaleDown(_player);
+			for(entity in entityGroup)
+			{
+				entity.scaleDown(_player);
+			}
 		}
 	}
 
@@ -104,21 +95,12 @@ class PlayState extends FlxState
 	public function scaleUp():Void
 	{
 		_player.active = false;
-		for(wall in _level.walls)
+		for(entityGroup in _level.entityGroups)
 		{
-			wall.scaleUp(_player);
-		}
-		for(floor in _level.floors)
-		{
-			floor.scaleUp(_player);
-		}
-		for(exit in _level.exits)
-		{
-			exit.scaleUp(_player);
-		}
-		for(scaleFloor in _level.scaleFloors)
-		{
-			scaleFloor.scaleUp(_player);
+			for(entity in entityGroup)
+			{
+				entity.scaleUp(_player);
+			}
 		}
 	}
 }
