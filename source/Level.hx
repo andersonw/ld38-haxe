@@ -14,6 +14,7 @@ class Level extends TiledMap
 {
     public var floors:FlxTypedGroup<Floor>;
     public var scaleFloors:FlxTypedGroup<Floor>;
+    public var gates:FlxTypedGroup<Floor>;
     public var walls:FlxTypedGroup<Wall>;
     public var exits:FlxTypedGroup<Exit>;
     public var coins:FlxTypedGroup<Coin>;
@@ -32,13 +33,14 @@ class Level extends TiledMap
 
         floors = new FlxTypedGroup<Floor>();
         scaleFloors = new FlxTypedGroup<Floor>();
+        gates = new FlxTypedGroup<Floor>();
         walls = new FlxTypedGroup<Wall>();
         exits = new FlxTypedGroup<Exit>();
         coins = new FlxTypedGroup<Coin>();
         balls = new FlxTypedGroup<Ball>();
         bins = new FlxTypedGroup<Bin>();
 
-        entityGroups = [floors, scaleFloors, walls, exits, bins, coins, balls];
+        entityGroups = [floors, scaleFloors, gates, walls, exits, bins, coins, balls];
 
         for (layer in layers)
         {
@@ -58,6 +60,9 @@ class Level extends TiledMap
                         levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.WHITE);
                         (cast levelObj).isScaleFloor = true;
                         scaleFloors.add(cast levelObj);
+                    case "Gates":
+                        levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.CYAN);
+                        gates.add(cast levelObj);
                     case "Walls":
                         levelObj = new Wall(obj.x, obj.y, obj.width, obj.height);
                         walls.add(cast levelObj);

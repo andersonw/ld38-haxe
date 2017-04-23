@@ -70,6 +70,11 @@ class PlayState extends FlxState
 			ball.kill();
 	}
 
+	public function ballToTheGate(ball:Ball, gate:Floor)
+	{
+		ball.kill();
+	}
+
 	public function ballToTheBin(ball:Ball, bin:Bin)
 	{
 		if(!ball.pickedUp && !bin.hasBall && ball.scaleFactor == bin.scaleFactor)
@@ -140,6 +145,7 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _level.balls, updateTooltip);
 
 		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
+		FlxG.overlap(_level.balls, _level.gates, ballToTheGate);
 
 		if(FlxG.keys.justPressed.R)
 		{
