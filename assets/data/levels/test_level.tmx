@@ -51,7 +51,7 @@
  <objectgroup name="Exits">
   <object id="5" name="end" x="767" y="385" width="63" height="62">
    <properties>
-    <property name="destination" value="level1.tmx"/>
+    <property name="destination" value="level2.tmx"/>
    </properties>
   </object>
  </objectgroup>
