@@ -32,6 +32,8 @@ class PlayState extends FlxState
 		_tooltip.alpha = 0.6;
 		add(_tooltip);
 
+		bgColor = new FlxColor(0xff303030);
+
 		super.create();
 	}
 

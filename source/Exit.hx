@@ -18,6 +18,7 @@ class Exit extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(UNSCALED_SIZE, UNSCALED_SIZE, FlxColor.PURPLE);
+        alpha = 0.6;
     }
 
     private function binsFull():Bool {
