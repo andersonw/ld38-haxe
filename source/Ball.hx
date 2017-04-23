@@ -17,6 +17,7 @@ class Ball extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(UNSCALED_SIZE, UNSCALED_SIZE, FlxColor.TRANSPARENT, true);
+        alpha = 0.6;
     }
 
     public override function update(elapsed:Float):Void

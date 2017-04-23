@@ -57,7 +57,7 @@ class Level extends TiledMap
                         levelObj = new Floor(obj.x, obj.y, obj.width, obj.height);
                         floors.add(cast levelObj);
                     case "ScaleFloors":
-                        levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.WHITE);
+                        levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.LIME);
                         (cast levelObj).isScaleFloor = true;
                         scaleFloors.add(cast levelObj);
                     case "Gates":
