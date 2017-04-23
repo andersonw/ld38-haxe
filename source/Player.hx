@@ -7,11 +7,37 @@ import flixel.util.FlxColor;
 class Player extends ScalableSprite
 {
     public var speed:Float = 200;
+    public var isCarrying:Bool = false;
+    public var carrying:Ball;
+
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
         makeGraphic(32, 32, FlxColor.RED);
         alpha = 0.6;
+    }
+
+    public function pickUp(ball:Ball)
+    {
+        isCarrying = true;
+        carrying = ball;
+        ball.pickedUp = true;
+        ball.carrier = this;
+        ball.redraw();
+    }
+
+    public function dropBall():Void
+    {
+        if(!isCarrying)
+            return;
+        
+        isCarrying = false;
+        carrying.pickedUp = false;
+        carrying.carrier = null;
+        // uncomment this if you want the ball to stop
+        // carrying.velocity.x = 0;
+        // carrying.velocity.y = 0;
+        carrying.redraw();
     }
 
     public override function update(elapsed:Float):Void
@@ -28,10 +54,10 @@ class Player extends ScalableSprite
         var _left:Bool = false;
         var _right:Bool = false;
 
-        _up = FlxG.keys.anyPressed([UP, W]);
-        _down = FlxG.keys.anyPressed([DOWN, S]);
-        _left = FlxG.keys.anyPressed([LEFT, A]);
-        _right = FlxG.keys.anyPressed([RIGHT, D]);
+        _up = FlxG.keys.anyPressed([UP]);
+        _down = FlxG.keys.anyPressed([DOWN]);
+        _left = FlxG.keys.anyPressed([LEFT]);
+        _right = FlxG.keys.anyPressed([RIGHT]);
 
         if (_up && _down)
             _up = _down = false;

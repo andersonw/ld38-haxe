@@ -48,6 +48,11 @@ class PlayState extends FlxState
 		scaleDown();
 	}
 
+	public function pickupBall(player:Player, ball:Ball)
+	{
+		player.pickUp(ball);
+	}
+
 	public function updateTooltip(player:Player, scalableSprite:ScalableSprite)
 	{
 		var helpText:String = scalableSprite.getHelpText(player);
@@ -81,7 +86,16 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _level.exits, updateTooltip);
 		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
 
-		if(FlxG.keys.justPressed.SPACE && _player.active)
+		if(FlxG.keys.justPressed.R)
+		{
+			resetLevel();
+		}
+
+		// for the remainder of options, require that the player is active
+		if(!_player.active)
+			return;
+
+		if(FlxG.keys.justPressed.SPACE)
 		{
 			for(exit in _level.exits)
 			{
@@ -93,7 +107,7 @@ class PlayState extends FlxState
 			}
 		}
 
-		if(FlxG.keys.justPressed.Z && _player.active)
+		if(FlxG.keys.justPressed.Z)
 		{
 			var canScaleDown:Bool = false;
 			for(scaleFloor in _level.scaleFloors)
@@ -105,7 +119,7 @@ class PlayState extends FlxState
 				scaleDown();
 		}
 
-		if(FlxG.keys.justPressed.X && _player.active)
+		if(FlxG.keys.justPressed.X)
 		{
 			var canScaleUp:Bool = false;
 			for(scaleFloor in _level.scaleFloors)
@@ -117,10 +131,18 @@ class PlayState extends FlxState
 				scaleUp();
 		}
 
-		if(FlxG.keys.justPressed.R)
+		if(FlxG.keys.justPressed.A)
 		{
-			resetLevel();
+			if(_player.isCarrying)
+			{
+				_player.dropBall();
+			}
+			else
+			{
+				FlxG.overlap(_player, _level.balls, pickupBall);
+			}
 		}
+
 	}
 
 	// function to make the world smaller (and player larger in comparison)
