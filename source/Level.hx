@@ -56,7 +56,7 @@ class Level extends TiledMap
                         levelObj = new Wall(obj.x, obj.y, obj.width, obj.height);
                         walls.add(cast levelObj);
                     case "Exits":
-                        levelObj = new Exit(obj.x, obj.y, obj.width, obj.height, obj.properties.get('destination'));
+                        levelObj = new Exit(obj.x, obj.y, obj.width, obj.height);
                         exits.add(cast levelObj);
                     case "Coins":
                         levelObj = new Coin(obj.x, obj.y);

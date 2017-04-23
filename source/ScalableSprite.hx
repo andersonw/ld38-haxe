@@ -43,6 +43,7 @@ class ScalableSprite extends FlxSprite
                                 x = dilate.x;
                                 y = dilate.y;
                                 updateHitbox();
+                                redraw();
                                 target.active = true;
                         }});
     }
@@ -65,14 +66,21 @@ class ScalableSprite extends FlxSprite
                             x = midpoint.x;
                             y = midpoint.y;
                             updateHitbox();
+                            redraw();
                             target.active = true;
                         }});
     }
 
     // Checks whether help text should be displayed.
     // If it should be displayed, returns the help text. If it shouldn't, returns an empty string.
+    // Override this!
     public function getHelpText(player:Player):String
     {
         return "";
+    }
+
+    public function redraw()
+    {
+        // override this to redraw things after scaling
     }
 }
