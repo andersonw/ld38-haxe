@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="13">
- <tileset firstgid="1" name="block_tileset" tilewidth="32" tileheight="32" tilecount="9">
+ <tileset firstgid="1" name="block_tileset" tilewidth="32" tileheight="32" tilecount="9" columns="3">
   <image source="../../images/block_tileset.png" width="96" height="96"/>
  </tileset>
  <layer name="Tile Layer 1" width="30" height="30">
@@ -44,9 +44,6 @@
  </objectgroup>
  <objectgroup name="Walls">
   <object id="6" name="wall" x="385" y="386" width="61" height="92"/>
- </objectgroup>
- <objectgroup name="Items">
-  <object id="10" name="coin1" type="coin" x="460" y="405" width="41" height="42"/>
  </objectgroup>
  <objectgroup name="Locations">
   <object id="4" name="start" x="257" y="387" width="62" height="61"/>
