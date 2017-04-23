@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
 
 class PlayState extends FlxState
 {
@@ -16,6 +17,7 @@ class PlayState extends FlxState
 	{
 		_levelFile = Registry.levelList[Registry.currLevel];
 		_level = new Level(_levelFile);
+
 		for(entityGroup in _level.entityGroups)
 		{
 			add(entityGroup);
@@ -23,7 +25,8 @@ class PlayState extends FlxState
 
 		_player = new Player(_level.spawn.x, _level.spawn.y);
 		add(_player);
-		FlxG.camera.setScrollBoundsRect(-10, -10, _level.fullWidth+20, _level.fullHeight+20, true);
+
+		resetLevelBounds();
 		FlxG.camera.follow(_player);
 		
 		_tooltip = new FlxText();
@@ -35,6 +38,11 @@ class PlayState extends FlxState
 		bgColor = new FlxColor(0xff303030);
 
 		super.create();
+	}
+
+	public function resetLevelBounds()
+	{
+		FlxG.worldBounds.set(_level.bounds.x, _level.bounds.y, _level.bounds.width, _level.bounds.height);
 	}
 
 	public function takeExit(player:Player, exit:Exit)
@@ -203,6 +211,8 @@ class PlayState extends FlxState
 					entity.scaleDown(_player);
 			}
 		}
+		_level.scaleDown(_player); //scales level bounds
+		resetLevelBounds();
 	}
 
 	// function to make the world larger (and player smaller in comparison)
@@ -217,5 +227,7 @@ class PlayState extends FlxState
 					entity.scaleUp(_player);
 			}
 		}
+		_level.scaleUp(_player); //scales level bounds
+		resetLevelBounds();
 	}
 }
