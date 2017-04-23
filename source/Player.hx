@@ -14,7 +14,7 @@ class Player extends ScalableSprite
         alpha = 0.6;
     }
 
-    override public function update(elapsed:Float):Void
+    public override function update(elapsed:Float):Void
     {
         movement();
         super.update(elapsed);

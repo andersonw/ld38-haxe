@@ -68,4 +68,11 @@ class ScalableSprite extends FlxSprite
                             target.active = true;
                         }});
     }
+
+    // Checks whether help text should be displayed.
+    // If it should be displayed, returns the help text. If it shouldn't, returns an empty string.
+    public function getHelpText(player:Player):String
+    {
+        return "";
+    }
 }

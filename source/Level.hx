@@ -5,6 +5,7 @@ import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
 
@@ -49,6 +50,7 @@ class Level extends TiledMap
                         floors.add(cast levelObj);
                     case "ScaleFloors":
                         levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.WHITE);
+                        (cast levelObj).isScaleFloor = true;
                         scaleFloors.add(cast levelObj);
                     case "Walls":
                         levelObj = new Wall(obj.x, obj.y, obj.width, obj.height);
