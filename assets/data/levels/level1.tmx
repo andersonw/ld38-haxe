@@ -56,6 +56,10 @@
   <object id="11" name="scale" x="416" y="321" width="93" height="93"/>
  </objectgroup>
  <objectgroup name="Exits">
-  <object id="17" name="exit" x="414" y="62" width="97" height="96"/>
+  <object id="17" name="exit" x="414" y="62" width="97" height="96">
+   <properties>
+    <property name="scale" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

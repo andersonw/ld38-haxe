@@ -43,6 +43,7 @@ class ScalableSprite extends FlxSprite
                                 x = dilate.x;
                                 y = dilate.y;
                                 updateHitbox();
+                                redraw();
                                 target.active = true;
                         }});
     }
@@ -65,7 +66,13 @@ class ScalableSprite extends FlxSprite
                             x = midpoint.x;
                             y = midpoint.y;
                             updateHitbox();
+                            redraw();
                             target.active = true;
                         }});
+    }
+
+    public function redraw()
+    {
+        // override this to redraw things after scaling
     }
 }
