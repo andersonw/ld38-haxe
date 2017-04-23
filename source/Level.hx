@@ -42,6 +42,11 @@ class Level extends TiledMap
 
         entityGroups = [floors, scaleFloors, gates, walls, exits, bins, coins, balls];
 
+        var minX:Float=0.;
+        var maxX:Float=0.;
+        var minY:Float=0.;
+        var maxY:Float=0.;
+
         for (layer in layers)
         {
             if (layer.type != TiledLayerType.OBJECT) continue;
@@ -49,6 +54,12 @@ class Level extends TiledMap
             var objectLayer:TiledObjectLayer = cast layer;
             for (obj in objectLayer.objects)
             {
+                // update bounds
+                minX = Math.min(minX, obj.x);
+                maxX = Math.max(maxX, obj.x+obj.width);
+                minY = Math.min(minY, obj.y);
+                maxY = Math.max(maxY, obj.y+obj.height);
+
                 // waste of an object, but if we don't put this compiler complains about levelObj.scaleFactor
                 var levelObj:ScalableSprite = new ScalableSprite();
                 switch(objectLayer.name)
@@ -107,7 +118,7 @@ class Level extends TiledMap
         }
 
         // set level bounds (used for collision)
-        bounds = new FlxRect(-10, -10, fullWidth+20, fullHeight+20);
+        bounds = new FlxRect(minX-10, minY-10, maxX-minX+20, maxY-minY+20);
     }
 
     public function scaleDown(target:ScalableSprite)
