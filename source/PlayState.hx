@@ -28,8 +28,9 @@ class PlayState extends FlxState
 
 	public function takeExit(player:Player, exit:Exit)
 	{
-		if(exit.containsSprite(player)){
+		if(exit.containsSprite(player) && player.active){
 			Registry.currLevel += 1;
+			player.active = false;
 			FlxG.switchState(new PlayState());
 		}
 	}
