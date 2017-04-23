@@ -38,75 +38,35 @@ class Level extends TiledMap
             if (layer.type != TiledLayerType.OBJECT) continue;
 
             var objectLayer:TiledObjectLayer = cast layer;
-            if (objectLayer.name == "Floors")
-                loadFloor(objectLayer);
-            if (objectLayer.name == "ScaleFloors")
-                loadScaleFloor(objectLayer);
-            else if (objectLayer.name == "Walls")
-                loadWalls(objectLayer);
-            else if (objectLayer.name == "Exits")
-                loadExits(objectLayer);
-            else if (objectLayer.name == "Coins")
-                loadCoins(objectLayer);
-            else if (objectLayer.name == "Locations")
-                loadLocations(objectLayer);
-
-        }
-    }
-
-    private function loadFloor(floorLayer:TiledObjectLayer)
-    {
-        for (floorObj in floorLayer.objects)
-        {
-            var floor:Floor = new Floor(floorObj.x, floorObj.y, floorObj.width, floorObj.height);
-            floors.add(floor);
-        }
-    }
-
-    private function loadScaleFloor(floorLayer:TiledObjectLayer)
-    {
-        for (floorObj in floorLayer.objects)
-        {
-            var floor:Floor = new Floor(floorObj.x, floorObj.y, floorObj.width, floorObj.height, FlxColor.WHITE);
-            scaleFloors.add(floor);
-        }
-    }
-
-    private function loadWalls(wallLayer:TiledObjectLayer)
-    {
-        for (exitObj in wallLayer.objects)
-        {
-            var wallRect:Wall = new Wall(exitObj.x, exitObj.y, exitObj.width, exitObj.height);
-            walls.add(wallRect);
-        }
-    }
-
-    private function loadExits(exitLayer:TiledObjectLayer)
-    {
-        for (exitObj in exitLayer.objects)
-        {
-            var exit:Exit = new Exit(exitObj.x, exitObj.y, exitObj.width, exitObj.height, exitObj.properties.get('destination'));
-            exits.add(exit);
-        }
-    }
-
-    private function loadCoins (coinLayer :TiledObjectLayer)
-    {
-        for (coinObj in coinLayer.objects)
-        {
-            var coin:Coin = new Coin(coinObj.x, coinObj.y);
-            coins.add(coin);
-        }
-    }
-
-    private function loadLocations(locLayer:TiledObjectLayer)
-    {
-        for (locObj in locLayer.objects)
-        {
-            if (locObj.name == "start")
+            for (obj in objectLayer.objects)
             {
-                spawn = new FlxPoint(locObj.x, locObj.y);
+                // waste of an object, but if we don't put this compiler complains about levelObj.scaleFactor
+                var levelObj:ScalableSprite = new ScalableSprite();
+                switch(objectLayer.name)
+                {
+                    case "Floors":
+                        levelObj = new Floor(obj.x, obj.y, obj.width, obj.height);
+                        floors.add(cast levelObj);
+                    case "ScaleFloors":
+                        levelObj = new Floor(obj.x, obj.y, obj.width, obj.height, FlxColor.WHITE);
+                        scaleFloors.add(cast levelObj);
+                    case "Walls":
+                        levelObj = new Wall(obj.x, obj.y, obj.width, obj.height);
+                        walls.add(cast levelObj);
+                    case "Exits":
+                        levelObj = new Exit(obj.x, obj.y, obj.width, obj.height, obj.properties.get('destination'));
+                        exits.add(cast levelObj);
+                    case "Coins":
+                        levelObj = new Coin(obj.x, obj.y);
+                        coins.add(cast levelObj);
+                    case "Locations":
+                        if(obj.name == "start")
+                            spawn = new FlxPoint(obj.x, obj.y);
+                }
+                if(obj.properties.contains('scale'))
+                    levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
             }
+
         }
     }
 

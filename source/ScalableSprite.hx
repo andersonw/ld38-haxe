@@ -6,10 +6,11 @@ import flixel.tweens.FlxTween;
 
 class ScalableSprite extends FlxSprite
 {
+    public var scaleFactor:Int = 0;
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
-    }   
+    }
 
     public function containsSprite(sprite:FlxSprite):Bool
     {
@@ -28,7 +29,7 @@ class ScalableSprite extends FlxSprite
     {
         var targetCenter:FlxPoint = target.getGraphicMidpoint();
         var dilate:FlxPoint = new FlxPoint(2*x-targetCenter.x, 2*y-targetCenter.y);
-
+        scaleFactor += 1;
         FlxTween.tween(this, 
                         {
                             x: dilate.x + 0.5*width, 
@@ -50,6 +51,7 @@ class ScalableSprite extends FlxSprite
     {
         var targetCenter:FlxPoint = target.getGraphicMidpoint();
         var midpoint:FlxPoint = new FlxPoint(0.5*(x+targetCenter.x), 0.5*(y+targetCenter.y));
+        scaleFactor -= 1;
         FlxTween.tween(this, 
                         {
                             x: midpoint.x - 0.25*width, 
