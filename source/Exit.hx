@@ -34,7 +34,7 @@ class Exit extends ScalableSprite
 
     public function canExit(player:Player):Bool
     {
-        return (player.scaleFactor == scaleFactor && binsFull());
+        return (player.scaleFactor == scaleFactor && binsFull() && overlapsSprite(player));
     }
 
     public override function getHelpText(player:Player):String
