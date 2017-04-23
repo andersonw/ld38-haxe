@@ -7,6 +7,8 @@ import flixel.tweens.FlxTween;
 class ScalableSprite extends FlxSprite
 {
     public var scaleFactor:Int = 0;
+    public var isScalable:Bool = true;
+
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);

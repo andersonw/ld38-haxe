@@ -29,6 +29,7 @@ class PlayState extends FlxState
 		_tooltip = new FlxText();
 		_tooltip.setFormat(AssetPaths.squaredpixel__ttf, 16, FlxColor.YELLOW);
 		_tooltip.visible = false;
+		_tooltip.alpha = 0.6;
 		add(_tooltip);
 
 		super.create();
@@ -141,7 +142,8 @@ class PlayState extends FlxState
 		{
 			for(entity in entityGroup)
 			{
-				entity.scaleDown(_player);
+				if (entity.isScalable)
+					entity.scaleDown(_player);
 			}
 		}
 	}
@@ -154,7 +156,8 @@ class PlayState extends FlxState
 		{
 			for(entity in entityGroup)
 			{
-				entity.scaleUp(_player);
+				if (entity.isScalable)
+					entity.scaleUp(_player);
 			}
 		}
 	}
