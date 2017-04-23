@@ -58,7 +58,7 @@
 </data>
  </layer>
  <objectgroup name="Exits">
-  <object id="12" name="exit" x="1552" y="650" width="500" height="476">
+  <object id="12" name="exit" x="1526" y="650" width="500" height="476">
    <properties>
     <property name="scale" type="int" value="4"/>
    </properties>
@@ -81,7 +81,7 @@
   <object id="5" name="start" x="2315" y="870" width="35" height="33"/>
  </objectgroup>
  <objectgroup name="Balls">
-  <object id="6" name="ball" x="2713" y="787" width="25" height="26">
+  <object id="6" name="ball" x="2712" y="786" width="25" height="26">
    <properties>
     <property name="notScalable" type="bool" value="false"/>
    </properties>
