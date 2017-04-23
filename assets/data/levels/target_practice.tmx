@@ -36,7 +36,7 @@
  <objectgroup name="Locations">
   <object id="18" name="start" x="32" y="416" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="ScaleFloors" offsetx="0" offsety="-224">
+ <objectgroup name="ScaleFloors">
   <object id="36" name="scale" x="28" y="412" width="40" height="40"/>
  </objectgroup>
  <objectgroup name="Bins">
