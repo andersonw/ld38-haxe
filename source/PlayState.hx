@@ -37,11 +37,9 @@ class PlayState extends FlxState
 
 	public function takeExit(player:Player, exit:Exit)
 	{
-		if(exit.containsSprite(player) && exit.isOpen() && player.active){
-			Registry.currLevel += 1;
-			player.active = false;
-			FlxG.switchState(new PlayState());
-		}
+		Registry.currLevel += 1;
+		player.active = false;
+		FlxG.switchState(new PlayState());
 	}
 
 	public function pickupCoin(player:Player, coin:Coin)
@@ -78,9 +76,22 @@ class PlayState extends FlxState
 			resetLevel();
 		}
 
-		FlxG.overlap(_player, _level.exits, takeExit);
 		FlxG.overlap(_player, _level.coins, pickupCoin);
+
+		FlxG.overlap(_player, _level.exits, updateTooltip);
 		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
+
+		if(FlxG.keys.justPressed.SPACE && _player.active)
+		{
+			for(exit in _level.exits)
+			{
+				if (exit.canExit(_player))
+				{
+					takeExit(_player, exit);
+					break;
+				}
+			}
+		}
 
 		if(FlxG.keys.justPressed.Z && _player.active)
 		{

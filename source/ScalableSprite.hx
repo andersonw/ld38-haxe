@@ -27,6 +27,19 @@ class ScalableSprite extends FlxSprite
         return true;
     }
 
+    public function overlapsSprite(sprite:FlxSprite):Bool
+    {
+        if(sprite.x+sprite.width < x)
+            return false;
+        if(sprite.x > x+width)
+            return false;
+        if(sprite.y+sprite.height < y)
+            return false;
+        if(sprite.y > y+height)
+            return false;
+        return true;
+    }
+
     public function scaleUp(target:FlxSprite)
     {
         var targetCenter:FlxPoint = target.getGraphicMidpoint();

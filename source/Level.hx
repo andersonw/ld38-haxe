@@ -58,7 +58,7 @@ class Level extends TiledMap
                         levelObj = new Wall(obj.x, obj.y, obj.width, obj.height);
                         walls.add(cast levelObj);
                     case "Exits":
-                        levelObj = new Exit(obj.x, obj.y, obj.width, obj.height);
+                        levelObj = new Exit(obj.x, obj.y);
                         exits.add(cast levelObj);
                     case "Coins":
                         levelObj = new Coin(obj.x, obj.y);
@@ -73,7 +73,13 @@ class Level extends TiledMap
                 if(obj.properties.contains('notScalable'))
                     levelObj.isScalable = false;
                 if(obj.properties.contains('scale'))
+                {
                     levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
+
+                    // NOTE: we are assuming that all objects which contain a scale have some "base size"
+                    levelObj.scale.set(Math.pow(2,levelObj.scaleFactor), Math.pow(2,levelObj.scaleFactor));
+                    levelObj.updateHitbox();
+                }
                 levelObj.redraw(); // redraw things in case they depend on scaleFactor
 
             }

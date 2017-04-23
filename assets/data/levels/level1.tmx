@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="18">
- <tileset firstgid="1" name="block_tileset" tilewidth="32" tileheight="32" tilecount="9">
+ <tileset firstgid="1" name="block_tileset" tilewidth="32" tileheight="32" tilecount="9" columns="3">
   <image source="../../images/block_tileset.png" width="96" height="96"/>
  </tileset>
  <layer name="Tile Layer 1" width="30" height="30">
@@ -56,7 +56,7 @@
   <object id="11" name="scale" x="416" y="321" width="93" height="93"/>
  </objectgroup>
  <objectgroup name="Exits">
-  <object id="17" name="exit" x="414" y="62" width="97" height="96">
+  <object id="17" name="exit" x="427" y="77" width="72" height="72">
    <properties>
     <property name="scale" value="1"/>
    </properties>
