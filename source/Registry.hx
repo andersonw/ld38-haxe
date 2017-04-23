@@ -12,6 +12,7 @@ class Registry
                                                  AssetPaths.unscalable_trivial_intro__tmx,
                                                  AssetPaths.unscalable_intro__tmx,
                                                  AssetPaths.unscalable_ball__tmx,
+                                                 AssetPaths.wall_ball__tmx,
                                                  AssetPaths.coin_square__tmx,
                                                  AssetPaths.target_practice__tmx,
                                                  AssetPaths.scale_ferry__tmx,
