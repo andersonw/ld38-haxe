@@ -10,11 +10,13 @@ class Ball extends ScalableSprite
     public var carrier:ScalableSprite;
 
     public var speed:Float = 210;
+    
+    public static inline var UNSCALED_SIZE = 32;
 
-    public function new(?X:Float=0, ?Y:Float=0, ?width:Int=32, ?height:Int=32)
+    public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
-        makeGraphic(width, height, FlxColor.TRANSPARENT, true);
+        makeGraphic(UNSCALED_SIZE, UNSCALED_SIZE, FlxColor.TRANSPARENT, true);
     }
 
     public override function update(elapsed:Float):Void
@@ -38,7 +40,7 @@ class Ball extends ScalableSprite
     public override function getHelpText(player:Player):String
     {
         if (!player.isCarrying && !pickedUp)
-            return "Press [A] to pick up";
+            return "Press [A] to pick up/drop";
         return "";
     }
 

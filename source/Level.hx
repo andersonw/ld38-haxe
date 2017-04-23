@@ -5,7 +5,7 @@ import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
-import flixel.text.FlxText;
+import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 
 
@@ -19,6 +19,8 @@ class Level extends TiledMap
     public var coins:FlxTypedGroup<Coin>;
     public var balls:FlxTypedGroup<Ball>;
     public var bins:FlxTypedGroup<Bin>;
+
+    public var bounds:FlxRect;
 
     public var entityGroups:Array<FlxTypedGroup<Dynamic>>;
 
@@ -83,6 +85,7 @@ class Level extends TiledMap
                     levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
 
                     // NOTE: we are assuming that all objects which contain a scale have some "base size"
+                    // see Exit.hx for example usage
                     levelObj.scale.set(Math.pow(2,levelObj.scaleFactor), Math.pow(2,levelObj.scaleFactor));
                     levelObj.updateHitbox();
                 }
@@ -98,6 +101,26 @@ class Level extends TiledMap
             }
         }
 
+        // set level bounds (used for collision)
+        bounds = new FlxRect(-10, -10, fullWidth+20, fullHeight+20);
+    }
+
+    public function scaleDown(target:ScalableSprite)
+    {
+        var targetCenter:FlxPoint = target.getGraphicMidpoint();
+        bounds = new FlxRect(0.5*(bounds.x+targetCenter.x), 
+                             0.5*(bounds.y+targetCenter.y), 
+                             0.5*bounds.width, 
+                             0.5*bounds.height);
+    }
+
+    public function scaleUp(target:ScalableSprite)
+    {
+        var targetCenter:FlxPoint = target.getGraphicMidpoint();
+        bounds = new FlxRect(2*bounds.x-targetCenter.x, 
+                             2*bounds.y-targetCenter.y, 
+                             2*bounds.width, 
+                             2*bounds.height);
     }
 
 }
