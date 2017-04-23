@@ -52,7 +52,7 @@ class PlayState extends FlxState
 
 	public function pickupBall(player:Player, ball:Ball)
 	{
-		if(!ball.inBin)
+		if(!ball.pickedUp && !player.isCarrying)
 			player.pickUp(ball);
 	}
 
@@ -97,6 +97,14 @@ class PlayState extends FlxState
 		FlxG.switchState(new PlayState());
 	}
 
+	public function previousLevel()
+	{
+		if(Registry.currLevel > 0) {
+			Registry.currLevel -= 1;
+		}
+		FlxG.switchState(new PlayState());
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -120,6 +128,11 @@ class PlayState extends FlxState
 		if(FlxG.keys.justPressed.R)
 		{
 			resetLevel();
+		}
+
+		if(FlxG.keys.justPressed.B)
+		{
+			previousLevel();
 		}
 
 		// for the remainder of options, require that the player is active
