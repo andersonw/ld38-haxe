@@ -50,7 +50,7 @@ class PlayState extends FlxState
 
 	public function pickupBall(player:Player, ball:Ball)
 	{
-		if(!ball.inBin)
+		if(!ball.pickedUp && !player.isCarrying)
 			player.pickUp(ball);
 	}
 
@@ -70,6 +70,11 @@ class PlayState extends FlxState
 			ball.redraw();
 
 			bin.hasBall = true;
+
+			for(exit in _level.exits)
+			{
+				exit.redraw();
+			}
 		}
 	}
 
@@ -113,6 +118,8 @@ class PlayState extends FlxState
 
 		FlxG.overlap(_player, _level.exits, updateTooltip);
 		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
+		FlxG.overlap(_player, _level.balls, updateTooltip);
+
 		FlxG.overlap(_level.balls, _level.walls, ballToTheWall);
 		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
 
