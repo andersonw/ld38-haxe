@@ -77,7 +77,7 @@ class PlayState extends FlxState
 		{
 			ball.pickedUp=true;
 			ball.inBin=true;
-			ball.isScalable=true; // so the ball always stays in the bin
+			ball.isScalable=bin.isScalable; // so the ball always stays in the bin
 			ball.carrier=bin;
 			ball.redraw();
 
