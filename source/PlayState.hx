@@ -68,6 +68,7 @@ class PlayState extends FlxState
 		{
 			ball.pickedUp=true;
 			ball.inBin=true;
+			ball.isScalable=true; // so the ball always stays in the bin
 			ball.carrier=bin;
 			ball.redraw();
 
@@ -122,7 +123,6 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
 		FlxG.overlap(_player, _level.balls, updateTooltip);
 
-		FlxG.overlap(_level.balls, _level.walls, ballToTheWall);
 		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
 
 		if(FlxG.keys.justPressed.R)
@@ -138,6 +138,8 @@ class PlayState extends FlxState
 		// for the remainder of options, require that the player is active
 		if(!_player.active)
 			return;
+
+		FlxG.overlap(_level.balls, _level.walls, ballToTheWall);
 
 		if(FlxG.keys.justPressed.SPACE)
 		{

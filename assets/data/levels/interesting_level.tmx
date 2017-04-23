@@ -44,7 +44,7 @@
   <object id="2" name="floor" x="255" y="227" width="611" height="348"/>
  </objectgroup>
  <objectgroup name="ScaleFloors">
-  <object id="3" name="scaleFloor" x="309" y="238" width="77" height="327"/>
+  <object id="3" name="scaleFloor" x="263" y="237" width="77" height="327"/>
  </objectgroup>
  <objectgroup name="Balls">
   <object id="4" name="unscalableBall" x="425" y="523" width="38" height="38">
@@ -54,10 +54,14 @@
   </object>
  </objectgroup>
  <objectgroup name="Walls">
-  <object id="5" name="wall" x="569" y="233" width="194" height="337"/>
+  <object id="5" name="wall" x="537" y="233" width="194" height="337"/>
  </objectgroup>
  <objectgroup name="Bins">
-  <object id="6" name="bin" x="787" y="365" width="36" height="37"/>
+  <object id="6" name="bin" x="747" y="375" width="67" height="65">
+   <properties>
+    <property name="scale" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Exits">
   <object id="7" name="exit" x="412" y="253" width="71" height="70">

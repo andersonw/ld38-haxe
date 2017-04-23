@@ -83,6 +83,7 @@ class Level extends TiledMap
                     levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
 
                     // NOTE: we are assuming that all objects which contain a scale have some "base size"
+                    // see Exit.hx for example usage
                     levelObj.scale.set(Math.pow(2,levelObj.scaleFactor), Math.pow(2,levelObj.scaleFactor));
                     levelObj.updateHitbox();
                 }
