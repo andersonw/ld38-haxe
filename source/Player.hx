@@ -11,8 +11,6 @@ class Player extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(32, 32, FlxColor.RED);
-        drag.x = 1600;
-        drag.y = 1600;
     }
 
     override public function update(elapsed:Float):Void
@@ -23,6 +21,7 @@ class Player extends ScalableSprite
 
     private function movement():Void
     {
+        // adapted from http://haxeflixel.com/documentation/groundwork/
         var _up:Bool = false;
         var _down:Bool = false;
         var _left:Bool = false;
@@ -38,7 +37,7 @@ class Player extends ScalableSprite
         if (_left && _right)
             _left = _right = false;
 
-        if (_up || _down || _left || _right){
+        if (_up || _down || _left || _right) {
             var mA:Float = 0;
             if(_up){
                 mA = -90;
@@ -61,7 +60,9 @@ class Player extends ScalableSprite
             }
             velocity.set(speed, 0);
             velocity.rotate(FlxPoint.weak(0,0), mA);
-
+        }
+        else {
+            velocity.set(0, 0);
         }
     }
 }

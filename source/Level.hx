@@ -93,4 +93,5 @@ class Level extends TiledMap
             }
         }
     }
+
 }

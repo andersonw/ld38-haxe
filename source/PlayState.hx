@@ -11,6 +11,8 @@ class PlayState extends FlxState
 
 	// the documentation said not to do this, but 
 	// seems to work okay.
+
+	// I think we might have issues if we try exporting though?
 	public function new(?levelFile:String="test_level.tmx")
 	{
 		_levelFile = levelFile;
@@ -51,7 +53,7 @@ class PlayState extends FlxState
 
 		FlxG.overlap(_player, _level.exits, takeExit);
 
-		if(FlxG.keys.justPressed.Z)
+		if(FlxG.keys.justPressed.Z && _player.active)
 		{
 			var canScaleDown:Bool = false;
 			for(scaleFloor in _level.scaleFloors)
@@ -63,7 +65,7 @@ class PlayState extends FlxState
 				scaleDown();
 		}
 
-		if(FlxG.keys.justPressed.X)
+		if(FlxG.keys.justPressed.X && _player.active)
 		{
 			var canScaleUp:Bool = false;
 			for(scaleFloor in _level.scaleFloors)
