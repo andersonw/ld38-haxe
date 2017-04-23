@@ -66,13 +66,14 @@ class PlayState extends FlxState
 
 	public function ballToTheWall(ball:Ball, wall:Wall)
 	{
-		if(!ball.pickedUp)
+		if(!ball.inBin)
 			ball.kill();
 	}
 
 	public function ballToTheGate(ball:Ball, gate:Floor)
 	{
-		ball.kill();
+		if(!ball.inBin)
+			ball.kill();
 	}
 
 	public function ballToTheBin(ball:Ball, bin:Bin)
