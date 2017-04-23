@@ -71,6 +71,14 @@ class ScalableSprite extends FlxSprite
                         }});
     }
 
+    // Checks whether help text should be displayed.
+    // If it should be displayed, returns the help text. If it shouldn't, returns an empty string.
+    // Override this!
+    public function getHelpText(player:Player):String
+    {
+        return "";
+    }
+
     public function redraw()
     {
         // override this to redraw things after scaling

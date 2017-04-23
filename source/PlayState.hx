@@ -2,12 +2,15 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
 	private var _player:Player;
 	private var _levelFile:String;
 	private var _level:Level;
+	private var _tooltip:FlxText;
 
 	override public function create():Void
 	{
@@ -23,6 +26,11 @@ class PlayState extends FlxState
 		FlxG.camera.setScrollBoundsRect(-10, -10, _level.fullWidth+20, _level.fullHeight+20, true);
 		FlxG.camera.follow(_player);
 		
+		_tooltip = new FlxText();
+		_tooltip.setFormat(AssetPaths.squaredpixel__ttf, 16, FlxColor.YELLOW);
+		_tooltip.visible = false;
+		add(_tooltip);
+
 		super.create();
 	}
 
@@ -41,6 +49,18 @@ class PlayState extends FlxState
 		scaleDown();
 	}
 
+	public function updateTooltip(player:Player, scalableSprite:ScalableSprite)
+	{
+		var helpText:String = scalableSprite.getHelpText(player);
+		if (helpText != "" && _player.active)
+		{
+			_tooltip.text = helpText;
+			_tooltip.x = scalableSprite.x+(scalableSprite.width-_tooltip.width)/2;
+			_tooltip.y = scalableSprite.y-_tooltip.height;
+			_tooltip.visible = true;
+		}
+	}
+
 	public function resetLevel()
 	{
 		FlxG.switchState(new PlayState());
@@ -49,6 +69,8 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		_tooltip.visible = false;
+
 		FlxG.collide(_player, _level.walls);
 		if(!FlxG.overlap(_player, _level.floors))
 		{
@@ -57,6 +79,7 @@ class PlayState extends FlxState
 
 		FlxG.overlap(_player, _level.exits, takeExit);
 		FlxG.overlap(_player, _level.coins, pickupCoin);
+		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
 
 		if(FlxG.keys.justPressed.Z && _player.active)
 		{
