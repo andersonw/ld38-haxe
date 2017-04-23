@@ -3,6 +3,8 @@ package;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
 
 class ScalableSprite extends FlxSprite
 {
@@ -97,5 +99,13 @@ class ScalableSprite extends FlxSprite
     public function redraw()
     {
         // override this to redraw things after scaling
+
+        // draw border around things that don't scale
+        if(!isScalable)
+        {
+            var lineStyle:LineStyle = { color: FlxColor.MAGENTA , thickness: 4 };
+            FlxSpriteUtil.drawRect(this, 0, 0, frameWidth, frameHeight, FlxColor.TRANSPARENT, lineStyle);
+        }
+
     }
 }

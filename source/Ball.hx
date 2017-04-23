@@ -57,5 +57,6 @@ class Ball extends ScalableSprite
             FlxSpriteUtil.drawEllipse(this, 0, 0, frameWidth, frameHeight, FlxColor.ORANGE);
         }
         
+        super.redraw();
     }
 }

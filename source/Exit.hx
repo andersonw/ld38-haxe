@@ -57,5 +57,7 @@ class Exit extends ScalableSprite
         else
             FlxSpriteUtil.fill(this, FlxColor.BLACK);
         FlxSpriteUtil.drawRect(this, 0, 0, frameWidth, frameHeight, FlxColor.TRANSPARENT, lineStyle);
+        
+        super.redraw();
     }
 }
