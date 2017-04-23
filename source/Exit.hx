@@ -11,7 +11,6 @@ class Exit extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(width, height, FlxColor.PURPLE);
-        FlxSpriteUtil.drawRect(this, 0, 0, width, height, FlxColor.TRANSPARENT, lineStyle);
     }
 
     public function isOpen():Bool {

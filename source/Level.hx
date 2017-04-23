@@ -16,6 +16,7 @@ class Level extends TiledMap
     public var walls:FlxTypedGroup<Wall>;
     public var exits:FlxTypedGroup<Exit>;
     public var coins:FlxTypedGroup<Coin>;
+    public var balls:FlxTypedGroup<Ball>;
 
     public var entityGroups:Array<FlxTypedGroup<Dynamic>>;
 
@@ -30,8 +31,9 @@ class Level extends TiledMap
         walls = new FlxTypedGroup<Wall>();
         exits = new FlxTypedGroup<Exit>();
         coins = new FlxTypedGroup<Coin>();
+        balls = new FlxTypedGroup<Ball>();
 
-        entityGroups = [floors, scaleFloors, walls, exits, coins];
+        entityGroups = [floors, scaleFloors, walls, exits, coins, balls];
 
         for (layer in layers)
         {
@@ -59,12 +61,16 @@ class Level extends TiledMap
                     case "Coins":
                         levelObj = new Coin(obj.x, obj.y);
                         coins.add(cast levelObj);
+                    case "Balls":
+                        levelObj = new Ball(obj.x, obj.y);
+                        balls.add(cast levelObj);
                     case "Locations":
                         if(obj.name == "start")
                             spawn = new FlxPoint(obj.x, obj.y);
                 }
                 if(obj.properties.contains('scale'))
                     levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
+                    levelObj.redraw(); // redraw things in case they depend on scaleFactor
             }
 
         }
