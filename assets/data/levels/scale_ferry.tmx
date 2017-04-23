@@ -25,7 +25,7 @@
 </data>
  </layer>
  <objectgroup name="Floors">
-  <object id="31" name="unscalableFloor" x="340" y="304" width="128" height="64">
+  <object id="31" name="unscalableFloor" x="360" y="304" width="128" height="64">
    <properties>
     <property name="notScalable" type="bool" value="false"/>
    </properties>
@@ -44,10 +44,10 @@
   </object>
  </objectgroup>
  <objectgroup name="Locations">
-  <object id="42" name="start" x="344" y="320" width="32" height="32"/>
+  <object id="42" name="start" x="378" y="320" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="ScaleFloors">
-  <object id="41" name="scale" x="340" y="308" width="56" height="56"/>
+  <object id="41" name="scale" x="370" y="312" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="Bins"/>
  <objectgroup name="Balls"/>
