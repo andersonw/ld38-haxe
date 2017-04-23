@@ -50,7 +50,7 @@ class PlayState extends FlxState
 
 	public function pickupBall(player:Player, ball:Ball)
 	{
-		if(!ball.inBin)
+		if(!ball.pickedUp && !player.isCarrying)
 			player.pickUp(ball);
 	}
 
