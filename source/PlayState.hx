@@ -42,16 +42,28 @@ class PlayState extends FlxState
 		}
 	}
 
+	public function pickupCoin(player:Player, coin:Coin)
+	{
+		coin.kill();
+		scaleDown();
+	}
+
+	public function resetLevel()
+	{
+		FlxG.switchState(new PlayState(_levelFile));
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		FlxG.collide(_player, _level.walls);
 		if(!FlxG.overlap(_player, _level.floors))
 		{
-			FlxG.switchState(new PlayState(_levelFile));
+			resetLevel();
 		}
 
 		FlxG.overlap(_player, _level.exits, takeExit);
+		FlxG.overlap(_player, _level.coins, pickupCoin);
 
 		if(FlxG.keys.justPressed.Z && _player.active)
 		{
@@ -75,6 +87,11 @@ class PlayState extends FlxState
 			}
 			if(canScaleUp)
 				scaleUp();
+		}
+
+		if(FlxG.keys.justPressed.R)
+		{
+			resetLevel();
 		}
 	}
 
