@@ -26,7 +26,8 @@ class ScalableSprite extends FlxSprite
 
     public function scaleUp(target:FlxSprite)
     {
-        var dilate:FlxPoint = new FlxPoint(2*x-target.x, 2*y-target.y);
+        var targetCenter:FlxPoint = target.getGraphicMidpoint();
+        var dilate:FlxPoint = new FlxPoint(2*x-targetCenter.x, 2*y-targetCenter.y);
 
         FlxTween.tween(this, 
                         {
@@ -47,7 +48,8 @@ class ScalableSprite extends FlxSprite
 
     public function scaleDown(target:FlxSprite)
     {
-        var midpoint:FlxPoint = new FlxPoint(0.5*(x+target.x), 0.5*(y+target.y));
+        var targetCenter:FlxPoint = target.getGraphicMidpoint();
+        var midpoint:FlxPoint = new FlxPoint(0.5*(x+targetCenter.x), 0.5*(y+targetCenter.y));
         FlxTween.tween(this, 
                         {
                             x: midpoint.x - 0.25*width, 
