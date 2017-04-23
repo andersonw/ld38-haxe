@@ -11,8 +11,6 @@ import flixel.util.FlxColor;
 // adapted from https://github.com/HaxeFlixel/flixel-demos/blob/master/Editors/TiledEditor/source/TiledLevel.hx
 class Level extends TiledMap
 {
-    public static inline var levelFilePath="assets/data/levels/";
-
     public var floors:FlxTypedGroup<Floor>;
     public var scaleFloors:FlxTypedGroup<Floor>;
     public var walls:FlxTypedGroup<Wall>;
@@ -23,9 +21,9 @@ class Level extends TiledMap
 
     public var spawn:FlxPoint;
 
-    public function new(levelName:String)
+    public function new(levelPath:String)
     {
-        super(levelFilePath + levelName);
+        super(levelPath);
 
         floors = new FlxTypedGroup<Floor>();
         scaleFloors = new FlxTypedGroup<Floor>();
