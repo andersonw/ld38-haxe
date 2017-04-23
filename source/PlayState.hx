@@ -13,10 +13,10 @@ class PlayState extends FlxState
 	{
 		_levelFile = Registry.levelList[Registry.currLevel];
 		_level = new Level(_levelFile);
-		add(_level.floors);
-		add(_level.scaleFloors);
-		add(_level.walls);
-		add(_level.exits);
+		for(entityGroup in _level.entityGroups)
+		{
+			add(entityGroup);
+		}
 
 		_player = new Player(_level.spawn.x, _level.spawn.y);
 		add(_player);
@@ -34,16 +34,28 @@ class PlayState extends FlxState
 		}
 	}
 
+	public function pickupCoin(player:Player, coin:Coin)
+	{
+		coin.kill();
+		scaleDown();
+	}
+
+	public function resetLevel()
+	{
+		FlxG.switchState(new PlayState());
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		FlxG.collide(_player, _level.walls);
 		if(!FlxG.overlap(_player, _level.floors))
 		{
-			FlxG.switchState(new PlayState());
+			resetLevel();
 		}
 
 		FlxG.overlap(_player, _level.exits, takeExit);
+		FlxG.overlap(_player, _level.coins, pickupCoin);
 
 		if(FlxG.keys.justPressed.Z && _player.active)
 		{
@@ -68,27 +80,23 @@ class PlayState extends FlxState
 			if(canScaleUp)
 				scaleUp();
 		}
+
+		if(FlxG.keys.justPressed.R)
+		{
+			resetLevel();
+		}
 	}
 
 	// function to make the world smaller (and player larger in comparison)
 	public function scaleDown():Void
 	{
 		_player.active = false;
-		for(wall in _level.walls)
+		for(entityGroup in _level.entityGroups)
 		{
-			wall.scaleDown(_player);
-		}
-		for(floor in _level.floors)
-		{
-			floor.scaleDown(_player);
-		}
-		for(exit in _level.exits)
-		{
-			exit.scaleDown(_player);
-		}
-		for(scaleFloor in _level.scaleFloors)
-		{
-			scaleFloor.scaleDown(_player);
+			for(entity in entityGroup)
+			{
+				entity.scaleDown(_player);
+			}
 		}
 	}
 
@@ -96,21 +104,12 @@ class PlayState extends FlxState
 	public function scaleUp():Void
 	{
 		_player.active = false;
-		for(wall in _level.walls)
+		for(entityGroup in _level.entityGroups)
 		{
-			wall.scaleUp(_player);
-		}
-		for(floor in _level.floors)
-		{
-			floor.scaleUp(_player);
-		}
-		for(exit in _level.exits)
-		{
-			exit.scaleUp(_player);
-		}
-		for(scaleFloor in _level.scaleFloors)
-		{
-			scaleFloor.scaleUp(_player);
+			for(entity in entityGroup)
+			{
+				entity.scaleUp(_player);
+			}
 		}
 	}
 }

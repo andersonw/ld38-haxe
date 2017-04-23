@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 
+
 // adapted from https://github.com/HaxeFlixel/flixel-demos/blob/master/Editors/TiledEditor/source/TiledLevel.hx
 class Level extends TiledMap
 {
@@ -14,6 +15,9 @@ class Level extends TiledMap
     public var scaleFloors:FlxTypedGroup<Floor>;
     public var walls:FlxTypedGroup<Wall>;
     public var exits:FlxTypedGroup<Exit>;
+    public var coins:FlxTypedGroup<Coin>;
+
+    public var entityGroups:Array<FlxTypedGroup<Dynamic>>;
 
     public var spawn:FlxPoint;
 
@@ -25,6 +29,9 @@ class Level extends TiledMap
         scaleFloors = new FlxTypedGroup<Floor>();
         walls = new FlxTypedGroup<Wall>();
         exits = new FlxTypedGroup<Exit>();
+        coins = new FlxTypedGroup<Coin>();
+
+        entityGroups = [floors, scaleFloors, walls, exits, coins];
 
         for (layer in layers)
         {
@@ -39,6 +46,8 @@ class Level extends TiledMap
                 loadWalls(objectLayer);
             else if (objectLayer.name == "Exits")
                 loadExits(objectLayer);
+            else if (objectLayer.name == "Coins")
+                loadCoins(objectLayer);
             else if (objectLayer.name == "Locations")
                 loadLocations(objectLayer);
 
@@ -78,6 +87,15 @@ class Level extends TiledMap
         {
             var exit:Exit = new Exit(exitObj.x, exitObj.y, exitObj.width, exitObj.height, exitObj.properties.get('destination'));
             exits.add(exit);
+        }
+    }
+
+    private function loadCoins (coinLayer :TiledObjectLayer)
+    {
+        for (coinObj in coinLayer.objects)
+        {
+            var coin:Coin = new Coin(coinObj.x, coinObj.y);
+            coins.add(coin);
         }
     }
 
