@@ -54,7 +54,7 @@
   </object>
  </objectgroup>
  <objectgroup name="Walls">
-  <object id="5" name="wall" x="537" y="233" width="194" height="337"/>
+  <object id="5" name="wall" x="537" y="227" width="194" height="348"/>
  </objectgroup>
  <objectgroup name="Bins">
   <object id="6" name="bin" x="747" y="375" width="67" height="65">
