@@ -9,6 +9,7 @@ class Registry
                                                  AssetPaths.two_coins__tmx,
                                                  AssetPaths.three_balls__tmx,
                                                  AssetPaths.gates_intro__tmx,
+                                                 AssetPaths.unscalable_trivial_intro__tmx,
                                                  AssetPaths.unscalable_intro__tmx,
                                                  AssetPaths.unscalable_ball__tmx,
                                                  AssetPaths.coin_square__tmx,
