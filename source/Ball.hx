@@ -6,6 +6,7 @@ import flixel.util.FlxSpriteUtil;
 class Ball extends ScalableSprite
 {
     public var pickedUp:Bool = false;
+    public var inBin:Bool = false;
     public var carrier:ScalableSprite;
 
     public var speed:Float = 210;
@@ -38,7 +39,10 @@ class Ball extends ScalableSprite
         FlxSpriteUtil.fill(this, FlxColor.TRANSPARENT);
         if(pickedUp)
         {
-            FlxSpriteUtil.drawEllipse(this, 0, 0, frameWidth, frameHeight, FlxColor.RED);
+            if(inBin)
+                FlxSpriteUtil.drawEllipse(this, 0, 0, frameWidth, frameHeight, FlxColor.GREEN);
+            else
+                FlxSpriteUtil.drawEllipse(this, 0, 0, frameWidth, frameHeight, FlxColor.RED);
             FlxSpriteUtil.drawEllipse(this, 2, 2, frameWidth-4, frameHeight-4, FlxColor.ORANGE);
         }else{
             FlxSpriteUtil.drawEllipse(this, 0, 0, frameWidth, frameHeight, FlxColor.ORANGE);

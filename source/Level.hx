@@ -18,6 +18,7 @@ class Level extends TiledMap
     public var exits:FlxTypedGroup<Exit>;
     public var coins:FlxTypedGroup<Coin>;
     public var balls:FlxTypedGroup<Ball>;
+    public var bins:FlxTypedGroup<Bin>;
 
     public var entityGroups:Array<FlxTypedGroup<Dynamic>>;
 
@@ -33,8 +34,9 @@ class Level extends TiledMap
         exits = new FlxTypedGroup<Exit>();
         coins = new FlxTypedGroup<Coin>();
         balls = new FlxTypedGroup<Ball>();
+        bins = new FlxTypedGroup<Bin>();
 
-        entityGroups = [floors, scaleFloors, walls, exits, coins, balls];
+        entityGroups = [floors, scaleFloors, walls, exits, bins, coins, balls];
 
         for (layer in layers)
         {
@@ -66,6 +68,9 @@ class Level extends TiledMap
                     case "Balls":
                         levelObj = new Ball(obj.x, obj.y);
                         balls.add(cast levelObj);
+                    case "Bins":
+                        levelObj = new Bin(obj.x, obj.y);
+                        bins.add(cast levelObj);
                     case "Locations":
                         if(obj.name == "start")
                             spawn = new FlxPoint(obj.x, obj.y);

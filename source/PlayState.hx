@@ -50,7 +50,27 @@ class PlayState extends FlxState
 
 	public function pickupBall(player:Player, ball:Ball)
 	{
-		player.pickUp(ball);
+		if(!ball.inBin)
+			player.pickUp(ball);
+	}
+
+	public function ballToTheWall(ball:Ball, wall:Wall)
+	{
+		if(!ball.pickedUp)
+			ball.kill();
+	}
+
+	public function ballToTheBin(ball:Ball, bin:Bin)
+	{
+		if(!ball.pickedUp && !bin.hasBall && ball.scaleFactor == bin.scaleFactor)
+		{
+			ball.pickedUp=true;
+			ball.inBin=true;
+			ball.carrier=bin;
+			ball.redraw();
+
+			bin.hasBall = true;
+		}
 	}
 
 	public function updateTooltip(player:Player, scalableSprite:ScalableSprite)
@@ -85,6 +105,8 @@ class PlayState extends FlxState
 
 		FlxG.overlap(_player, _level.exits, updateTooltip);
 		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
+		FlxG.overlap(_level.balls, _level.walls, ballToTheWall);
+		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
 
 		if(FlxG.keys.justPressed.R)
 		{
