@@ -103,6 +103,14 @@ class PlayState extends FlxState
 		FlxG.switchState(new PlayState());
 	}
 
+	public function nextLevel()
+	{
+		if(Registry.currLevel < (Registry.levelList.length - 1)) {
+			Registry.currLevel += 1;
+		}
+		FlxG.switchState(new PlayState());
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
@@ -131,6 +139,11 @@ class PlayState extends FlxState
 		if(FlxG.keys.justPressed.B)
 		{
 			previousLevel();
+		}
+
+		if(FlxG.keys.justPressed.N)
+		{
+			nextLevel();
 		}
 
 		// for the remainder of options, require that the player is active
