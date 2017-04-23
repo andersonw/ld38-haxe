@@ -120,7 +120,8 @@ class PlayState extends FlxState
 		{
 			for(entity in entityGroup)
 			{
-				entity.scaleDown(_player);
+				if (entity.isScalable)
+					entity.scaleDown(_player);
 			}
 		}
 	}
@@ -133,7 +134,8 @@ class PlayState extends FlxState
 		{
 			for(entity in entityGroup)
 			{
-				entity.scaleUp(_player);
+				if (entity.isScalable)
+					entity.scaleUp(_player);
 			}
 		}
 	}

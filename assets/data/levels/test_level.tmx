@@ -52,7 +52,11 @@
   <object id="5" name="end" x="767" y="385" width="63" height="62"/>
  </objectgroup>
  <objectgroup name="Coins">
-  <object id="10" name="coin" x="448" y="320" width="30" height="29"/>
+  <object id="10" name="coin" x="448" y="320" width="30" height="29">
+   <properties>
+    <property name="notScalable" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="12" name="coin" x="449" y="512" width="30" height="29"/>
  </objectgroup>
 </map>

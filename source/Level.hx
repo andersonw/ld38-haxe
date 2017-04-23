@@ -70,9 +70,12 @@ class Level extends TiledMap
                         if(obj.name == "start")
                             spawn = new FlxPoint(obj.x, obj.y);
                 }
+                if(obj.properties.contains('notScalable'))
+                    levelObj.isScalable = false;
                 if(obj.properties.contains('scale'))
                     levelObj.scaleFactor = Std.parseInt(obj.properties.get('scale'));
-                    levelObj.redraw(); // redraw things in case they depend on scaleFactor
+                levelObj.redraw(); // redraw things in case they depend on scaleFactor
+
             }
 
         }
