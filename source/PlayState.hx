@@ -9,18 +9,9 @@ class PlayState extends FlxState
 	private var _levelFile:String;
 	private var _level:Level;
 
-	// the documentation said not to do this, but 
-	// seems to work okay.
-
-	// I think we might have issues if we try exporting though?
-	public function new(?levelFile:String="test_level.tmx")
-	{
-		_levelFile = levelFile;
-		super();
-	}
-
 	override public function create():Void
 	{
+		_levelFile = Registry.levelList[Registry.currLevel];
 		_level = new Level(_levelFile);
 		add(_level.floors);
 		add(_level.scaleFloors);
@@ -38,7 +29,8 @@ class PlayState extends FlxState
 	public function takeExit(player:Player, exit:Exit)
 	{
 		if(exit.containsSprite(player)){
-			FlxG.switchState(new PlayState(exit.destination));
+			Registry.currLevel += 1;
+			FlxG.switchState(new PlayState());
 		}
 	}
 
@@ -48,7 +40,7 @@ class PlayState extends FlxState
 		FlxG.collide(_player, _level.walls);
 		if(!FlxG.overlap(_player, _level.floors))
 		{
-			FlxG.switchState(new PlayState(_levelFile));
+			FlxG.switchState(new PlayState());
 		}
 
 		FlxG.overlap(_player, _level.exits, takeExit);
