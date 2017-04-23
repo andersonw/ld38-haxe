@@ -134,6 +134,15 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		_tooltip.visible = false;
 
+		if(Registry.isTweening && Registry.tweenSem == 0)
+		{
+			// this gets executed after everything finishes 
+			// tweening in a scale operation.
+			
+			resetLevelBounds();
+			Registry.isTweening = false;
+		}
+
 		FlxG.collide(_player, _level.walls);
 		if(!FlxG.overlap(_player, _level.floors) && 
 		   !FlxG.overlap(_player, _level.scaleFloors) && 
@@ -234,7 +243,6 @@ class PlayState extends FlxState
 					entity.scaleDown(_player);
 			}
 		}
-		resetLevelBounds();
 	}
 
 	// function to make the world larger (and player smaller in comparison)
@@ -249,6 +257,5 @@ class PlayState extends FlxState
 					entity.scaleUp(_player);
 			}
 		}
-		resetLevelBounds();
 	}
 }

@@ -19,4 +19,7 @@ class Registry
                                                  AssetPaths.scale_ferry__tmx,
                                                  AssetPaths.target_practice2__tmx];
     public static var currLevel:Int = 0; 
+    
+    public static var tweenSem:Int = 0;
+    public static var isTweening:Bool = false;
 }

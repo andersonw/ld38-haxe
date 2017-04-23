@@ -47,6 +47,10 @@ class ScalableSprite extends FlxSprite
         var targetCenter:FlxPoint = target.getGraphicMidpoint();
         var dilate:FlxPoint = new FlxPoint(2*x-targetCenter.x, 2*y-targetCenter.y);
         scaleFactor += 1;
+        
+        Registry.tweenSem += 1;
+        Registry.isTweening = true;
+
         FlxTween.tween(this, 
                         {
                             x: dilate.x + 0.5*width, 
@@ -61,6 +65,7 @@ class ScalableSprite extends FlxSprite
                                 y = dilate.y;
                                 updateHitbox();
                                 redraw();
+                                Registry.tweenSem -= 1;
                                 target.active = true;
                         }});
     }
@@ -70,6 +75,10 @@ class ScalableSprite extends FlxSprite
         var targetCenter:FlxPoint = target.getGraphicMidpoint();
         var midpoint:FlxPoint = new FlxPoint(0.5*(x+targetCenter.x), 0.5*(y+targetCenter.y));
         scaleFactor -= 1;
+
+        Registry.tweenSem += 1;
+        Registry.isTweening = true;
+
         FlxTween.tween(this, 
                         {
                             x: midpoint.x - 0.25*width, 
@@ -84,6 +93,7 @@ class ScalableSprite extends FlxSprite
                             y = midpoint.y;
                             updateHitbox();
                             redraw();
+                            Registry.tweenSem -= 1;
                             target.active = true;
                         }});
     }
