@@ -42,10 +42,7 @@ class Level extends TiledMap
 
         entityGroups = [floors, scaleFloors, gates, walls, exits, bins, coins, balls];
 
-        var minX:Float=0.;
-        var maxX:Float=0.;
-        var minY:Float=0.;
-        var maxY:Float=0.;
+        
 
         for (layer in layers)
         {
@@ -54,12 +51,6 @@ class Level extends TiledMap
             var objectLayer:TiledObjectLayer = cast layer;
             for (obj in objectLayer.objects)
             {
-                // update bounds
-                minX = Math.min(minX, obj.x);
-                maxX = Math.max(maxX, obj.x+obj.width);
-                minY = Math.min(minY, obj.y);
-                maxY = Math.max(maxY, obj.y+obj.height);
-
                 // waste of an object, but if we don't put this compiler complains about levelObj.scaleFactor
                 var levelObj:ScalableSprite = new ScalableSprite();
                 switch(objectLayer.name)
@@ -118,25 +109,30 @@ class Level extends TiledMap
         }
 
         // set level bounds (used for collision)
-        bounds = new FlxRect(minX-10, minY-10, maxX-minX+20, maxY-minY+20);
+        updateBounds();
     }
 
-    public function scaleDown(target:ScalableSprite)
+    public function updateBounds()
     {
-        var targetCenter:FlxPoint = target.getGraphicMidpoint();
-        bounds = new FlxRect(0.5*(bounds.x+targetCenter.x), 
-                             0.5*(bounds.y+targetCenter.y), 
-                             0.5*bounds.width, 
-                             0.5*bounds.height);
+        // update bounds
+        var minX:Float=0.;
+        var maxX:Float=0.;
+        var minY:Float=0.;
+        var maxY:Float=0.;
+        
+        for(entityGroup in entityGroups)
+        {
+            for(obj in entityGroup)
+            {
+                minX = Math.min(minX, obj.x);
+                maxX = Math.max(maxX, obj.x+obj.width);
+                minY = Math.min(minY, obj.y);
+                maxY = Math.max(maxY, obj.y+obj.height);
+            }
+        }
+
+        bounds = new FlxRect(minX-100, minY-100, maxX-minX+200, maxY-minY+200);
     }
 
-    public function scaleUp(target:ScalableSprite)
-    {
-        var targetCenter:FlxPoint = target.getGraphicMidpoint();
-        bounds = new FlxRect(2*bounds.x-targetCenter.x, 
-                             2*bounds.y-targetCenter.y, 
-                             2*bounds.width, 
-                             2*bounds.height);
-    }
 
 }
