@@ -2,7 +2,8 @@ package;
 
 class Registry
 {
-    public static var levelList:Array<String> = [AssetPaths.interesting_level2__tmx,
+    public static var levelList:Array<String> = [AssetPaths.scale_ferry__tmx,
+                                                 AssetPaths.interesting_level2__tmx,
                                                  AssetPaths.target_practice__tmx,
                                                  AssetPaths.interesting_level__tmx,
                                                  AssetPaths.test_gates__tmx,
