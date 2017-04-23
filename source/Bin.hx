@@ -12,6 +12,5 @@ class Bin extends ScalableSprite
         super(X, Y);
         makeGraphic(UNSCALED_SIZE, UNSCALED_SIZE, FlxColor.ORANGE, true);
         FlxSpriteUtil.drawEllipse(this, 2, 2, frameWidth-4, frameHeight-4, FlxColor.BLACK);
-        alpha = 0.6;
     }
 }
