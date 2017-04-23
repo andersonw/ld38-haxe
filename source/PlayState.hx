@@ -40,11 +40,6 @@ class PlayState extends FlxState
 		super.create();
 	}
 
-	public function resetLevelBounds()
-	{
-		FlxG.worldBounds.set(_level.bounds.x, _level.bounds.y, _level.bounds.width, _level.bounds.height);
-	}
-
 	public function takeExit(player:Player, exit:Exit)
 	{
 		Registry.currLevel += 1;
@@ -110,6 +105,12 @@ class PlayState extends FlxState
 	public function resetLevel()
 	{
 		FlxG.switchState(new PlayState());
+	}
+
+	public function resetLevelBounds()
+	{
+		_level.updateBounds();
+		FlxG.worldBounds.set(_level.bounds.x, _level.bounds.y, _level.bounds.width, _level.bounds.height);
 	}
 
 	public function previousLevel()
@@ -233,7 +234,6 @@ class PlayState extends FlxState
 					entity.scaleDown(_player);
 			}
 		}
-		_level.scaleDown(_player); //scales level bounds
 		resetLevelBounds();
 	}
 
@@ -249,7 +249,6 @@ class PlayState extends FlxState
 					entity.scaleUp(_player);
 			}
 		}
-		_level.scaleUp(_player); //scales level bounds
 		resetLevelBounds();
 	}
 }

@@ -14,7 +14,7 @@ class Registry
                                                  AssetPaths.unscalable_ball__tmx,
                                                  AssetPaths.coin_square__tmx,
                                                  AssetPaths.target_practice__tmx,
-                                                 AssetPaths.scale_ferry__tmx];
-
+                                                 AssetPaths.scale_ferry__tmx,
+                                                 AssetPaths.target_practice2__tmx];
     public static var currLevel:Int = 0; 
 }
