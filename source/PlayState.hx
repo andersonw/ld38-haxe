@@ -142,15 +142,6 @@ class PlayState extends FlxState
 			resetLevel();
 		}
 
-		FlxG.overlap(_player, _level.coins, pickupCoin);
-
-		FlxG.overlap(_player, _level.exits, updateTooltip);
-		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
-		FlxG.overlap(_player, _level.balls, updateTooltip);
-
-		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
-		FlxG.overlap(_level.balls, _level.gates, ballToTheGate);
-
 		if(FlxG.keys.justPressed.R)
 		{
 			resetLevel();
@@ -169,8 +160,16 @@ class PlayState extends FlxState
 		// for the remainder of options, require that the player is active
 		if(!_player.active)
 			return;
+			
+		FlxG.overlap(_player, _level.coins, pickupCoin);
+
+		FlxG.overlap(_player, _level.exits, updateTooltip);
+		FlxG.overlap(_player, _level.scaleFloors, updateTooltip);
+		FlxG.overlap(_player, _level.balls, updateTooltip);
 
 		FlxG.overlap(_level.balls, _level.walls, ballToTheWall);
+		FlxG.overlap(_level.balls, _level.bins, ballToTheBin);
+		FlxG.overlap(_level.balls, _level.gates, ballToTheGate);
 
 		if(FlxG.keys.justPressed.SPACE)
 		{
