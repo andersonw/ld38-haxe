@@ -39,7 +39,7 @@
  </layer>
  <objectgroup name="Floors">
   <object id="1" name="floor" x="225" y="291" width="320" height="283"/>
-  <object id="2" name="floor" x="579" y="388" width="70" height="94"/>
+  <object id="2" name="floor" x="570" y="388" width="79" height="94"/>
   <object id="3" name="floor" x="642" y="292" width="249" height="282"/>
  </objectgroup>
  <objectgroup name="Walls">

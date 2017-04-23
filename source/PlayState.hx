@@ -133,7 +133,9 @@ class PlayState extends FlxState
 		_tooltip.visible = false;
 
 		FlxG.collide(_player, _level.walls);
-		if(!FlxG.overlap(_player, _level.floors))
+		if(!FlxG.overlap(_player, _level.floors) && 
+		   !FlxG.overlap(_player, _level.scaleFloors) && 
+		   !FlxG.overlap(_player, _level.exits))
 		{
 			resetLevel();
 		}
