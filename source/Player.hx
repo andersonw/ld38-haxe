@@ -11,6 +11,7 @@ class Player extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(32, 32, FlxColor.RED);
+        alpha = 0.6;
     }
 
     override public function update(elapsed:Float):Void
