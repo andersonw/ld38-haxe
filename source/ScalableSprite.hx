@@ -66,7 +66,6 @@ class ScalableSprite extends FlxSprite
                                 updateHitbox();
                                 redraw();
                                 Registry.tweenSem -= 1;
-                                target.active = true;
                         }});
     }
 
@@ -94,7 +93,6 @@ class ScalableSprite extends FlxSprite
                             updateHitbox();
                             redraw();
                             Registry.tweenSem -= 1;
-                            target.active = true;
                         }});
     }
 
