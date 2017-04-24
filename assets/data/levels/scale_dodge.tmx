@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" nextobjectid="57">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" nextobjectid="58">
  <layer name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -56,9 +56,9 @@
  </objectgroup>
  <objectgroup name="ScaleFloors">
   <object id="43" name="scale" x="928" y="928" width="48" height="48"/>
-  <object id="44" name="scale" x="928" y="832" width="48" height="48"/>
-  <object id="45" name="scale" x="928" y="736" width="48" height="48"/>
-  <object id="46" name="scale" x="928" y="640" width="48" height="48"/>
+  <object id="44" name="scale" x="928" y="800" width="48" height="48"/>
+  <object id="45" name="scale" x="928" y="672" width="48" height="48"/>
+  <object id="46" name="scale" x="928" y="544" width="48" height="48"/>
  </objectgroup>
  <objectgroup name="Bins">
   <object id="34" name="bin" x="768" y="448" width="32" height="32">
@@ -85,10 +85,15 @@
     <property name="notScalable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="49" x="736" y="896" width="96" height="32"/>
-  <object id="50" x="512" y="768" width="224" height="32"/>
-  <object id="51" x="736" y="640" width="96" height="32"/>
-  <object id="54" x="512" y="512" width="224" height="32"/>
+  <object id="49" name="wall" x="736" y="896" width="96" height="32"/>
+  <object id="50" name="wall" x="512" y="768" width="224" height="32"/>
+  <object id="51" name="wall" x="736" y="640" width="96" height="32"/>
+  <object id="54" name="wall" x="512" y="512" width="224" height="32"/>
+  <object id="57" name="unscalableWall" x="672" y="320" width="224" height="32">
+   <properties>
+    <property name="notScalable" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Coins"/>
 </map>
