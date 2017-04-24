@@ -256,9 +256,8 @@ class PlayState extends FlxState
 		}
 		else
 		{
-			FlxG.switchState(new MenuState());
-		}
-		
+			FlxG.switchState(new EndState());
+		}	
 	}
 
 	override public function update(elapsed:Float):Void
