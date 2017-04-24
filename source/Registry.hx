@@ -18,6 +18,7 @@ class Registry
                                                  AssetPaths.gates_tricky__tmx,
                                                  AssetPaths.target_practice__tmx,
                                                  AssetPaths.scale_ferry__tmx,
+                                                 AssetPaths.scale_ferry2__tmx,
                                                  AssetPaths.target_practice2__tmx,
                                                  AssetPaths.scale_dodge__tmx,
                                                  AssetPaths.the_end__tmx];
