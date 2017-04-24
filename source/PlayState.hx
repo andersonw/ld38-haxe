@@ -275,6 +275,7 @@ class PlayState extends FlxState
 		{
 			if(_player.isCarrying)
 			{
+				_dropSound.play();
 				_player.dropBall();
 			}
 			else
