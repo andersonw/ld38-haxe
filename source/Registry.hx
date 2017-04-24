@@ -19,7 +19,8 @@ class Registry
                                                  AssetPaths.target_practice__tmx,
                                                  AssetPaths.scale_ferry__tmx,
                                                  AssetPaths.target_practice2__tmx,
-                                                 AssetPaths.scale_dodge__tmx];
+                                                 AssetPaths.scale_dodge__tmx,
+                                                 AssetPaths.the_end__tmx];
     public static var currLevel:Int = 0; 
     
     public static var tweenSem:Int = 0;
