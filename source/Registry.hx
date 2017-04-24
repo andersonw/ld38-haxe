@@ -6,6 +6,7 @@ class Registry
                                                  AssetPaths.scale_intro__tmx,
                                                  AssetPaths.best_level__tmx,
                                                  AssetPaths.coin_intro__tmx,
+                                                 AssetPaths.coin_intro2__tmx,
                                                  AssetPaths.two_coins__tmx,
                                                  AssetPaths.three_balls__tmx,
                                                  AssetPaths.gates_intro__tmx,
