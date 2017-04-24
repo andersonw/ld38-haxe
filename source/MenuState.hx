@@ -45,6 +45,7 @@ class MenuState extends FlxState
 		{
 			FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
 		}
+		Registry.currLevel = 0;
 	}
 
 	override public function update(elapsed:Float):Void
