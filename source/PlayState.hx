@@ -43,7 +43,7 @@ class PlayState extends FlxState
 		FlxG.camera.follow(_player);
 		
 		_tooltip = new FlxText();
-		_tooltip.setFormat(AssetPaths.squaredpixel__ttf, 16, FlxColor.YELLOW);
+		_tooltip.setFormat(AssetPaths.pixelmix__ttf, 16, FlxColor.YELLOW);
 		_tooltip.visible = false;
 		_tooltip.alpha = 0.6;
 		add(_tooltip);
@@ -60,6 +60,7 @@ class PlayState extends FlxState
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 		_dropSound.volume = 0.6;
 		_ballInBinSound = FlxG.sound.load(AssetPaths.ballinbin__wav);
+		_ballInBinSound.volume = 0.6;
 		_changeLevelSound = FlxG.sound.load(AssetPaths.long_zoom__wav);
 		_changeLevelSound.persist = true;
 		_resetSound = FlxG.sound.load(AssetPaths.reset__wav);
