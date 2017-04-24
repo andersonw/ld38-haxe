@@ -30,7 +30,7 @@ class EndState extends FlxState
 		redSquare.alpha = 0.8;
 		add(redSquare);
 
-		FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
+		FlxG.sound.playMusic(AssetPaths.silly_song2__wav, 1, true);
 	}
 
 	override public function update(elapsed:Float):Void

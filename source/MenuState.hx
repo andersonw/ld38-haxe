@@ -43,7 +43,7 @@ class MenuState extends FlxState
 
 		FlxG.mouse.visible = false;
 
-		FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
+		FlxG.sound.playMusic(AssetPaths.silly_song2__wav, 1, true);
 
 		Registry.currLevel = 0;
 	}
