@@ -23,6 +23,7 @@ class PlayState extends FlxState
 	private var _pickupSound:FlxSound;
 	private var _dropSound:FlxSound;
 	private var _ballInBinSound:FlxSound;
+	private var _changeLevelSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -56,6 +57,8 @@ class PlayState extends FlxState
 		_pickupSound = FlxG.sound.load(AssetPaths.pickup__wav);
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 		_ballInBinSound = FlxG.sound.load(AssetPaths.ballinbin__wav);
+		_changeLevelSound = FlxG.sound.load(AssetPaths.long_zoom__wav);
+		_changeLevelSound.persist = true;
 
 		if (FlxG.sound.music == null)
 		{
@@ -119,6 +122,8 @@ class PlayState extends FlxState
 
 		var center:FlxPoint = player.getGraphicMidpoint();
 
+		_changeLevelSound.play();
+		
 		for(entityGroup in _level.entityGroups)
 		{
 			for(entity in entityGroup)
