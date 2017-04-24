@@ -40,11 +40,11 @@ class Exit extends ScalableSprite
     public override function getHelpText(player:Player):String
     {
         if (!binsFull())
-            return "Some bin is empty";
+            return "You need to deposit the balls first!";
         if (player.scaleFactor < scaleFactor && this.overlapsSprite(player))
             return "You're too small!";
         if (player.scaleFactor > scaleFactor && player.overlapsSprite(this))
-            return "You're too large!";
+            return "You're too big!";
         if (canExit(player))
             return "[Space] Exit the level!";
         return "";

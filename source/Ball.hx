@@ -40,7 +40,7 @@ class Ball extends ScalableSprite
     public override function getHelpText(player:Player):String
     {
         if (!player.isCarrying && !pickedUp)
-            return "Press [A] to pick up/drop";
+            return "[A] Pick up/drop ball";
         return "";
     }
 
