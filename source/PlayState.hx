@@ -57,6 +57,11 @@ class PlayState extends FlxState
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 		_ballInBinSound = FlxG.sound.load(AssetPaths.ballinbin__wav);
 
+		if (FlxG.sound.music == null)
+		{
+			FlxG.sound.playMusic(AssetPaths.silly_song__wav, 1, true);
+		}
+
 		Registry.isTweening = false;
 		Registry.tweenSem = 0;
 
