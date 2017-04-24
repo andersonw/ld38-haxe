@@ -40,6 +40,11 @@ class MenuState extends FlxState
 
 		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
 		_shrinkSound.persist = true;
+
+		if (FlxG.sound.music == null)
+		{
+			FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
+		}
 	}
 
 	override public function update(elapsed:Float):Void
