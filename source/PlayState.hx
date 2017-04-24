@@ -73,8 +73,10 @@ class PlayState extends FlxState
 	public function pickupBall(player:Player, ball:Ball)
 	{
 		if(!ball.pickedUp && !player.isCarrying)
+		{
 			_pickupSound.play();
 			player.pickUp(ball);
+		}
 	}
 
 	public function ballToTheWall(ball:Ball, wall:Wall)
