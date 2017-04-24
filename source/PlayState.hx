@@ -173,6 +173,7 @@ class PlayState extends FlxState
 		   !FlxG.overlap(_player, _level.exits))
 		{
 			resetLevel();
+			_player.active=true;
 		}
 
 		if (!playerTouchingWall())
@@ -196,7 +197,15 @@ class PlayState extends FlxState
 		// for the remainder of options, require that the player is active
 		if(!_player.active)
 			return;
-			
+
+		FlxG.collide(_player, _level.walls);
+		if(!FlxG.overlap(_player, _level.floors) && 
+		   !FlxG.overlap(_player, _level.scaleFloors) && 
+		   !FlxG.overlap(_player, _level.exits))
+		{
+			resetLevel();
+		}
+
 		FlxG.overlap(_player, _level.coins, pickupCoin);
 
 		FlxG.overlap(_player, _level.exits, updateTooltip);
