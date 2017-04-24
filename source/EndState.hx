@@ -19,7 +19,7 @@ class EndState extends FlxState
 
 		bgColor = new FlxColor(0xff303030);
 
-		endText = new FlxText(40, 100, "You beat the game!\nThanks for playing!");
+		endText = new FlxText(40, 100, 0, "You beat the game!\nThanks for playing!");
 		endText.setFormat(AssetPaths.pixelmix__ttf, 48, FlxColor.WHITE, FlxTextAlign.CENTER);
         endText.x = (800-endText.width)/2;
 		add(endText);

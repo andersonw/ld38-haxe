@@ -24,11 +24,11 @@ class MenuState extends FlxState
 
 		bgColor = new FlxColor(0xff303030);
 
-		titleText = new FlxText(40, 100, "LITTLE BIG SQUARE");
+		titleText = new FlxText(40, 100, 0, "LITTLE BIG SQUARE");
 		titleText.setFormat(AssetPaths.pixelmix__ttf, 48, FlxColor.RED);
 		add(titleText);
 
-		helpText = new FlxText(500, 450, "[SPACE] START");
+		helpText = new FlxText(500, 450, 0, "[SPACE] START");
 		helpText.setFormat(AssetPaths.pixelmix__ttf, 32, FlxColor.WHITE);
 		add(helpText);
 
