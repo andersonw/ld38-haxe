@@ -252,8 +252,13 @@ class PlayState extends FlxState
 	{
 		if(Registry.currLevel < (Registry.levelList.length - 1)) {
 			Registry.currLevel += 1;
+			FlxG.switchState(new PlayState());
 		}
-		FlxG.switchState(new PlayState());
+		else
+		{
+			FlxG.switchState(new MenuState());
+		}
+		
 	}
 
 	override public function update(elapsed:Float):Void

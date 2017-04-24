@@ -40,6 +40,8 @@ class MenuState extends FlxState
 
 		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
 		_shrinkSound.persist = true;
+
+		Registry.currLevel = 0;
 	}
 
 	override public function update(elapsed:Float):Void
