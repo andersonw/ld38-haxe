@@ -290,6 +290,14 @@ class PlayState extends FlxState
 			nextLevel();
 		}
 
+		if(FlxG.keys.justPressed.M)
+		{
+			if (FlxG.sound.music.playing)
+				FlxG.sound.music.pause();
+			else
+				FlxG.sound.music.play();
+		}
+
 		// for the remainder of options, require that the player is active
 		if(!_player.active)
 			return;
