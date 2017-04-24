@@ -24,6 +24,7 @@ class PlayState extends FlxState
 	private var _dropSound:FlxSound;
 	private var _ballInBinSound:FlxSound;
 	private var _changeLevelSound:FlxSound;
+	private var _resetSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -55,10 +56,13 @@ class PlayState extends FlxState
 		_deathSound = FlxG.sound.load(AssetPaths.death__wav);
 		_explosionSound = FlxG.sound.load(AssetPaths.explosion__wav);
 		_pickupSound = FlxG.sound.load(AssetPaths.pickup__wav);
+		_pickupSound.volume = 0.6;
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
+		_dropSound.volume = 0.6;
 		_ballInBinSound = FlxG.sound.load(AssetPaths.ballinbin__wav);
 		_changeLevelSound = FlxG.sound.load(AssetPaths.long_zoom__wav);
 		_changeLevelSound.persist = true;
+		_resetSound = FlxG.sound.load(AssetPaths.reset__wav);
 
 		if (FlxG.sound.music == null)
 		{
@@ -272,6 +276,7 @@ class PlayState extends FlxState
 
 		if(FlxG.keys.justPressed.R)
 		{
+			_resetSound.play();
 			resetLevel();
 		}
 
@@ -295,6 +300,7 @@ class PlayState extends FlxState
 		   !FlxG.overlap(_player, _level.exits))
 		{
 			_player.active = false;
+			_deathSound.play();
 			FlxTween.tween(_player.scale, {x:0, y:0}, 0.5, 
 			{onComplete: function(tween:FlxTween)
 			{
