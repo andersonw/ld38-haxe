@@ -17,6 +17,10 @@ class PlayState extends FlxState
 	private var _wallBumpSound:FlxSound;
 	private var _shrinkSound:FlxSound;
 	private var _expandSound:FlxSound;
+	private var _deathSound:FlxSound;
+	private var _explosionSound:FlxSound;
+	private var _pickupSound:FlxSound;
+	private var _dropSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -45,6 +49,10 @@ class PlayState extends FlxState
 		_wallBumpSound = FlxG.sound.load(AssetPaths.bump__wav);
 		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
 		_expandSound = FlxG.sound.load(AssetPaths.zoom_out__wav);
+		_deathSound = FlxG.sound.load(AssetPaths.death__wav);
+		_explosionSound = FlxG.sound.load(AssetPaths.explosion__wav);
+		_pickupSound = FlxG.sound.load(AssetPaths.pickup__wav);
+		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 
 		super.create();
 	}
@@ -65,19 +73,24 @@ class PlayState extends FlxState
 	public function pickupBall(player:Player, ball:Ball)
 	{
 		if(!ball.pickedUp && !player.isCarrying)
+			_pickupSound.play();
 			player.pickUp(ball);
 	}
 
 	public function ballToTheWall(ball:Ball, wall:Wall)
 	{
-		if(!ball.inBin)
+		if(!ball.inBin) {
+			_explosionSound.play();
 			ball.kill();
+		}
 	}
 
 	public function ballToTheGate(ball:Ball, gate:Floor)
 	{
-		if(!ball.inBin)
+		if(!ball.inBin) {
+			_explosionSound.play();
 			ball.kill();
+		}
 	}
 
 	public function ballToTheBin(ball:Ball, bin:Bin)
@@ -166,7 +179,6 @@ class PlayState extends FlxState
 		{
 			// this gets executed after everything finishes 
 			// tweening in a scale operation.
-			
 			resetLevelBounds();
 			Registry.isTweening = false;
 			_player.active=true;
@@ -176,6 +188,7 @@ class PlayState extends FlxState
 		   !FlxG.overlap(_player, _level.scaleFloors) && 
 		   !FlxG.overlap(_player, _level.exits))
 		{
+			_deathSound.play();
 			resetLevel();
 			_player.active=true;
 		}
