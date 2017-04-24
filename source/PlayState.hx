@@ -75,6 +75,8 @@ class PlayState extends FlxState
 
 	public function initLevel()
 	{
+		var center:FlxPoint = _player.getGraphicMidpoint();
+
 		for(entityGroup in _level.entityGroups)
 		{
 			for(entity in entityGroup)
@@ -82,14 +84,25 @@ class PlayState extends FlxState
 				var oldAlpha = entity.alpha;
 				entity.alpha = 0.;
 				FlxTween.tween(entity, {alpha:oldAlpha}, 1.5);
+
+				// hacky entity positioning
+				var K = 10.;
+
+				entity.x = K*entity.x - (K-1)*center.x;
+				entity.y = K*entity.y - (K-1)*center.y;
+				entity.scale.x = K*entity.scale.x;
+				entity.scale.y = K*entity.scale.y;
+				entity.updateHitbox();
+				entity.redraw(); 
+
+				entity.scaleK(center, 1/K, 1.5, false);
 			}
 		}
 
 		FlxTween.tween(_player, {alpha: Player.DEFAULT_ALPHA}, 1.5,
 						{onComplete: function(tween:FlxTween)
 						{
-							_player.active = true;	
-							_player.updateHitbox();
+							resetLevel();
 						}});
 						
 	}
@@ -105,7 +118,7 @@ class PlayState extends FlxState
 		{
 			for(entity in entityGroup)
 			{
-				entity.scaleK(center, 32, 2, true);
+				entity.scaleK(center, 1./32, 2, true);
 				FlxTween.tween(entity, {alpha:0}, 0.5, {startDelay: 1.5});
 			}
 		}
