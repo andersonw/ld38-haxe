@@ -294,7 +294,12 @@ class PlayState extends FlxState
 		   !FlxG.overlap(_player, _level.scaleFloors) && 
 		   !FlxG.overlap(_player, _level.exits))
 		{
-			resetLevel();
+			_player.active = false;
+			FlxTween.tween(_player.scale, {x:0, y:0}, 0.5, 
+			{onComplete: function(tween:FlxTween)
+			{
+				resetLevel();
+			}});
 		}
 
 		FlxG.overlap(_player, _level.coins, pickupCoin);
