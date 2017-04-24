@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	private var _explosionSound:FlxSound;
 	private var _pickupSound:FlxSound;
 	private var _dropSound:FlxSound;
+	private var _ballInBinSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -54,6 +55,7 @@ class PlayState extends FlxState
 		_explosionSound = FlxG.sound.load(AssetPaths.explosion__wav);
 		_pickupSound = FlxG.sound.load(AssetPaths.pickup__wav);
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
+		_ballInBinSound = FlxG.sound.load(AssetPaths.ballinbin__wav);
 
 		Registry.isTweening = false;
 		Registry.tweenSem = 0;
@@ -152,6 +154,7 @@ class PlayState extends FlxState
 	{
 		if(!ball.pickedUp && !bin.hasBall && ball.scaleFactor == bin.scaleFactor)
 		{
+			_ballInBinSound.play();
 			ball.pickedUp=true;
 			ball.inBin=true;
 			ball.isScalable=bin.isScalable; // so the ball always stays in the bin
