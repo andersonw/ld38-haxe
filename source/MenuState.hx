@@ -41,6 +41,8 @@ class MenuState extends FlxState
 		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
 		_shrinkSound.persist = true;
 
+		FlxG.mouse.visible = false;
+
 		FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
 
 		Registry.currLevel = 0;
