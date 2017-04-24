@@ -10,6 +10,8 @@ class Player extends ScalableSprite
     public var isCarrying:Bool = false;
     public var carrying:Ball;
 
+    public var isHuggingWall:Bool = false;
+
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);

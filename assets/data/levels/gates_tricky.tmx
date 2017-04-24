@@ -57,12 +57,10 @@
   <object id="3" name="scaleFloor" x="419" y="725" width="25" height="25"/>
  </objectgroup>
  <objectgroup name="Walls">
-  <object id="4" name="wall" x="352" y="416" width="288" height="160"/>
+  <object id="4" name="wall" x="310" y="416" width="296" height="160"/>
   <object id="9" name="wall" x="256" y="480" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="Gates">
-  <object id="5" name="gate" x="310" y="416" width="42" height="160"/>
- </objectgroup>
+ <objectgroup name="Gates"/>
  <objectgroup name="Bins">
   <object id="6" name="bin" x="416" y="363" width="31" height="30"/>
  </objectgroup>

@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
@@ -12,6 +13,8 @@ class PlayState extends FlxState
 	private var _levelFile:String;
 	private var _level:Level;
 	private var _tooltip:FlxText;
+
+	private var _wallBumpSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -36,6 +39,8 @@ class PlayState extends FlxState
 		add(_tooltip);
 
 		bgColor = new FlxColor(0xff303030);
+
+		_wallBumpSound = FlxG.sound.load(AssetPaths.bump__wav);
 
 		super.create();
 	}
@@ -102,6 +107,25 @@ class PlayState extends FlxState
 		}
 	}
 
+	public function playerTouchingWall():Bool
+	{
+		for (wall in _level.walls)
+		{
+			if (wall.overlapsSprite(_player))
+				return true;
+		}
+		return false;
+	}
+
+	public function processWallCollision(player:Player, wall:Wall)
+	{
+		if (!player.isHuggingWall)
+		{
+			_wallBumpSound.play();
+			player.isHuggingWall = true;
+		}
+	}
+
 	public function resetLevel()
 	{
 		FlxG.switchState(new PlayState());
@@ -143,13 +167,16 @@ class PlayState extends FlxState
 			Registry.isTweening = false;
 		}
 
-		FlxG.collide(_player, _level.walls);
+		FlxG.collide(_player, _level.walls, processWallCollision);
 		if(!FlxG.overlap(_player, _level.floors) && 
 		   !FlxG.overlap(_player, _level.scaleFloors) && 
 		   !FlxG.overlap(_player, _level.exits))
 		{
 			resetLevel();
 		}
+
+		if (!playerTouchingWall())
+			_player.isHuggingWall = false;
 
 		if(FlxG.keys.justPressed.R)
 		{
