@@ -15,6 +15,8 @@ class PlayState extends FlxState
 	private var _tooltip:FlxText;
 
 	private var _wallBumpSound:FlxSound;
+	private var _shrinkSound:FlxSound;
+	private var _expandSound:FlxSound;
 
 	override public function create():Void
 	{
@@ -41,6 +43,8 @@ class PlayState extends FlxState
 		bgColor = new FlxColor(0xff303030);
 
 		_wallBumpSound = FlxG.sound.load(AssetPaths.bump__wav);
+		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
+		_expandSound = FlxG.sound.load(AssetPaths.zoom_out__wav);
 
 		super.create();
 	}
@@ -239,7 +243,10 @@ class PlayState extends FlxState
 					canScaleDown = true;
 			}
 			if(canScaleDown)
+			{
+				_shrinkSound.play();
 				scaleDown();
+			}
 		}
 
 		if(FlxG.keys.justPressed.X)
@@ -251,7 +258,10 @@ class PlayState extends FlxState
 					canScaleUp = true;
 			}
 			if(canScaleUp)
+			{
+				_expandSound.play();
 				scaleUp();
+			}
 		}
 
 		if(FlxG.keys.justPressed.A)
