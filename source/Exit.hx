@@ -53,10 +53,15 @@ class Exit extends ScalableSprite
     public override function redraw()
     {
         if(isOpen())
-            FlxSpriteUtil.fill(this, FlxColor.PURPLE);
+        {
+            FlxSpriteUtil.fill(this, FlxColor.TRANSPARENT);
+            FlxSpriteUtil.drawRect(this, 0, 0, frameWidth, frameHeight, FlxColor.TRANSPARENT, lineStyle);
+        }
         else
+        {
             FlxSpriteUtil.fill(this, FlxColor.BLACK);
-        FlxSpriteUtil.drawRect(this, 0, 0, frameWidth, frameHeight, FlxColor.TRANSPARENT, lineStyle);
+            FlxSpriteUtil.drawRect(this, 0, 0, frameWidth, frameHeight, FlxColor.BLACK, lineStyle);
+        }
         
         super.redraw();
     }
