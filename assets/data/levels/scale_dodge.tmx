@@ -89,7 +89,7 @@
   <object id="50" name="wall" x="512" y="768" width="224" height="32"/>
   <object id="51" name="wall" x="736" y="640" width="96" height="32"/>
   <object id="54" name="wall" x="512" y="512" width="224" height="32"/>
-  <object id="57" name="unscalableWall" x="672" y="320" width="224" height="32">
+  <object id="57" name="unscalableWall" x="704" y="320" width="160" height="32">
    <properties>
     <property name="notScalable" type="bool" value="false"/>
    </properties>
