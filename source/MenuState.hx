@@ -41,10 +41,8 @@ class MenuState extends FlxState
 		_shrinkSound = FlxG.sound.load(AssetPaths.zoom_in__wav);
 		_shrinkSound.persist = true;
 
-		if (FlxG.sound.music == null)
-		{
-			FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
-		}
+		FlxG.sound.playMusic(AssetPaths.silly_song2__ogg, 1, true);
+
 		Registry.currLevel = 0;
 	}
 
@@ -55,6 +53,8 @@ class MenuState extends FlxState
 		if (FlxG.keys.justPressed.SPACE)
 		{
 			Registry.fromExit = true;
+			FlxG.sound.music.stop();
+			FlxG.sound.music = null;
 			_shrinkSound.play();
 			FlxG.switchState(new PlayState());
 		}
