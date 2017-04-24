@@ -243,10 +243,7 @@ class PlayState extends FlxState
 					canScaleDown = true;
 			}
 			if(canScaleDown)
-			{
-				_shrinkSound.play();
 				scaleDown();
-			}
 		}
 
 		if(FlxG.keys.justPressed.X)
@@ -258,10 +255,7 @@ class PlayState extends FlxState
 					canScaleUp = true;
 			}
 			if(canScaleUp)
-			{
-				_expandSound.play();
 				scaleUp();
-			}
 		}
 
 		if(FlxG.keys.justPressed.A)
@@ -282,6 +276,7 @@ class PlayState extends FlxState
 	public function scaleDown():Void
 	{
 		_player.active = false;
+		_shrinkSound.play();
 		for(entityGroup in _level.entityGroups)
 		{
 			for(entity in entityGroup)
@@ -296,6 +291,7 @@ class PlayState extends FlxState
 	public function scaleUp():Void
 	{
 		_player.active = false;
+		_expandSound.play();
 		for(entityGroup in _level.entityGroups)
 		{
 			for(entity in entityGroup)
