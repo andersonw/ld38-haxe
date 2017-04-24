@@ -6,6 +6,8 @@ import flixel.util.FlxColor;
 
 class Player extends ScalableSprite
 {
+    public static var DEFAULT_ALPHA = 0.6;
+
     public var speed:Float = 200;
     public var isCarrying:Bool = false;
     public var carrying:Ball;
@@ -16,7 +18,7 @@ class Player extends ScalableSprite
     {
         super(X, Y);
         makeGraphic(32, 32, FlxColor.RED);
-        alpha = 0.6;
+        alpha = DEFAULT_ALPHA;
     }
 
     public function pickUp(ball:Ball)

@@ -4,8 +4,8 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import flixel.util.FlxSpriteUtil;
 
 class PlayState extends FlxState
 {
@@ -33,6 +33,7 @@ class PlayState extends FlxState
 		}
 
 		_player = new Player(_level.spawn.x, _level.spawn.y);
+		_player.active = false;
 		add(_player);
 
 		resetLevelBounds();
@@ -55,13 +56,31 @@ class PlayState extends FlxState
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 
 		super.create();
+
+		_player.scale.set(32, 32);
+		_player.alpha = 1;
+		initLevel();
+	}
+
+	public function initLevel()
+	{
+		FlxTween.tween(_player, {alpha: Player.DEFAULT_ALPHA}, 1.5);
+		FlxTween.tween(_player.scale, {x: 1, y: 1}, 2.0,
+						{onComplete: function(tween:FlxTween)
+						{
+							_player.active = true;	
+							_player.updateHitbox();
+						}});
 	}
 
 	public function takeExit(player:Player, exit:Exit)
 	{
-		Registry.currLevel += 1;
 		player.active = false;
-		FlxG.switchState(new PlayState());
+		FlxTween.tween(player, {alpha: 1}, 1.5);
+		FlxTween.tween(player.scale, {x: 32, y:32}, 2.0,
+					  {onComplete: function(tween:FlxTween){
+						  nextLevel();
+					  }});
 	}
 
 	public function pickupCoin(player:Player, coin:Coin)
