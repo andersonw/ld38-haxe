@@ -165,9 +165,9 @@ class PlayState extends FlxState
 			
 			resetLevelBounds();
 			Registry.isTweening = false;
+			_player.active=true;
 		}
 
-		FlxG.collide(_player, _level.walls, processWallCollision);
 		if(!FlxG.overlap(_player, _level.floors) && 
 		   !FlxG.overlap(_player, _level.scaleFloors) && 
 		   !FlxG.overlap(_player, _level.exits))
@@ -175,6 +175,8 @@ class PlayState extends FlxState
 			resetLevel();
 			_player.active=true;
 		}
+
+		FlxG.collide(_player, _level.walls, processWallCollision);
 
 		if (!playerTouchingWall())
 			_player.isHuggingWall = false;
