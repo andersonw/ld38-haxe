@@ -24,4 +24,7 @@ class Registry
     
     public static var tweenSem:Int = 0;
     public static var isTweening:Bool = false;
+
+    // true if coming from an Exit
+    public static var fromExit:Bool = false;
 }

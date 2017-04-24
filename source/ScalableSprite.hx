@@ -42,58 +42,44 @@ class ScalableSprite extends FlxSprite
         return true;
     }
 
-    public function scaleUp(target:FlxSprite)
+    public function scaleK(point:FlxPoint, K:Float, duration:Float, onlyAnimate:Bool)
     {
-        var targetCenter:FlxPoint = target.getGraphicMidpoint();
-        var dilate:FlxPoint = new FlxPoint(2*x-targetCenter.x, 2*y-targetCenter.y);
-        scaleFactor += 1;
+        var dilate:FlxPoint = new FlxPoint(K*x-(K-1)*point.x, K*y-(K-1)*point.y);
         
         Registry.tweenSem += 1;
         Registry.isTweening = true;
 
         FlxTween.tween(this, 
                         {
-                            x: dilate.x + 0.5*width, 
-                            y: dilate.y + 0.5*height
+                            x: dilate.x + 0.5*(K-1)*width, 
+                            y: dilate.y + 0.5*(K-1)*height
                         }, 
-                        1);
+                        duration);
         FlxTween.tween(scale, 
-                        {x: 2*scale.x, y: 2*scale.y}, 
-                        1, 
+                        {x: K*scale.x, y: K*scale.y}, 
+                        duration, 
                         {onComplete: function(tween:FlxTween){
-                                x = dilate.x;
-                                y = dilate.y;
-                                updateHitbox();
-                                redraw();
-                                Registry.tweenSem -= 1;
+                                if(!onlyAnimate)
+                                {
+                                    x = dilate.x;
+                                    y = dilate.y;
+                                    updateHitbox();
+                                    redraw();
+                                    Registry.tweenSem -= 1;
+                                }
                         }});
+    }
+
+    public function scaleUp(target:FlxSprite)
+    {
+        scaleFactor += 1;
+        scaleK(target.getGraphicMidpoint(), 2., 1., false);
     }
 
     public function scaleDown(target:FlxSprite)
     {
-        var targetCenter:FlxPoint = target.getGraphicMidpoint();
-        var midpoint:FlxPoint = new FlxPoint(0.5*(x+targetCenter.x), 0.5*(y+targetCenter.y));
         scaleFactor -= 1;
-
-        Registry.tweenSem += 1;
-        Registry.isTweening = true;
-
-        FlxTween.tween(this, 
-                        {
-                            x: midpoint.x - 0.25*width, 
-                            y: midpoint.y - 0.25*height
-                        }, 
-                        1);
-        FlxTween.tween(scale, 
-                        {x: 0.5*scale.x, y: 0.5*scale.y}, 
-                        1, 
-                        {onComplete: function(tween:FlxTween){
-                            x = midpoint.x;
-                            y = midpoint.y;
-                            updateHitbox();
-                            redraw();
-                            Registry.tweenSem -= 1;
-                        }});
+        scaleK(target.getGraphicMidpoint(), 0.5, 1., false);
     }
 
     // Checks whether help text should be displayed.

@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
@@ -33,7 +34,6 @@ class PlayState extends FlxState
 		}
 
 		_player = new Player(_level.spawn.x, _level.spawn.y);
-		_player.active = false;
 		add(_player);
 
 		resetLevelBounds();
@@ -55,32 +55,66 @@ class PlayState extends FlxState
 		_pickupSound = FlxG.sound.load(AssetPaths.pickup__wav);
 		_dropSound = FlxG.sound.load(AssetPaths.drop__wav);
 
+		Registry.isTweening = false;
+		Registry.tweenSem = 0;
+
+
 		super.create();
 
-		_player.scale.set(32, 32);
-		_player.alpha = 1;
-		initLevel();
+		
+		if(Registry.fromExit){
+			Registry.fromExit = false;
+			//_player.scale.set(32, 32);
+			_player.alpha = 1;
+			_player.active = false;
+			initLevel();
+		}
 	}
 
 	public function initLevel()
 	{
-		FlxTween.tween(_player, {alpha: Player.DEFAULT_ALPHA}, 1.5);
-		FlxTween.tween(_player.scale, {x: 1, y: 1}, 2.0,
+		for(entityGroup in _level.entityGroups)
+		{
+			for(entity in entityGroup)
+			{
+				var oldAlpha = entity.alpha;
+				entity.alpha = 0.;
+				FlxTween.tween(entity, {alpha:oldAlpha}, 1.5);
+			}
+		}
+
+		FlxTween.tween(_player, {alpha: Player.DEFAULT_ALPHA}, 1.5,
 						{onComplete: function(tween:FlxTween)
 						{
 							_player.active = true;	
 							_player.updateHitbox();
 						}});
+						
 	}
 
 	public function takeExit(player:Player, exit:Exit)
 	{
 		player.active = false;
-		FlxTween.tween(player, {alpha: 1}, 1.5);
+		Registry.fromExit = true;
+
+		var center:FlxPoint = player.getGraphicMidpoint();
+
+		for(entityGroup in _level.entityGroups)
+		{
+			for(entity in entityGroup)
+			{
+				entity.scaleK(center, 32, 2, true);
+				FlxTween.tween(entity, {alpha:0}, 0.5, {startDelay: 1.5});
+			}
+		}
+		FlxTween.tween(player, {alpha: 1}, 2, {onComplete: function(tween:FlxTween){
+						  nextLevel();
+		}});
+		/*
 		FlxTween.tween(player.scale, {x: 32, y:32}, 2.0,
 					  {onComplete: function(tween:FlxTween){
 						  nextLevel();
-					  }});
+					  }, startDelay: 2.});*/
 	}
 
 	public function pickupCoin(player:Player, coin:Coin)
@@ -202,15 +236,6 @@ class PlayState extends FlxState
 			// tweening in a scale operation.
 			resetLevelBounds();
 			Registry.isTweening = false;
-			_player.active=true;
-		}
-
-		if(!FlxG.overlap(_player, _level.floors) && 
-		   !FlxG.overlap(_player, _level.scaleFloors) && 
-		   !FlxG.overlap(_player, _level.exits))
-		{
-			_deathSound.play();
-			resetLevel();
 			_player.active=true;
 		}
 
