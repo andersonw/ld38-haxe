@@ -285,15 +285,16 @@ class PlayState extends FlxState
 			resetLevel();
 		}
 
-		if(FlxG.keys.justPressed.B)
-		{
-			previousLevel();
-		}
-
-		if(FlxG.keys.justPressed.N)
-		{
-			nextLevel();
-		}
+// 		debug helper commands
+//		if(FlxG.keys.justPressed.B)
+//		{
+//			previousLevel();
+//		}
+//
+//		if(FlxG.keys.justPressed.N)
+//		{
+//			nextLevel();
+//		}
 
 		if(FlxG.keys.justPressed.M)
 		{
