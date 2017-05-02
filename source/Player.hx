@@ -63,6 +63,11 @@ class Player extends ScalableSprite
         _left = FlxG.keys.anyPressed([LEFT]);
         _right = FlxG.keys.anyPressed([RIGHT]);
 
+        if (FlxG.keys.anyPressed([SHIFT]))
+            speed = 50;
+        else
+            speed = 200;
+
         if (_up && _down)
             _up = _down = false;
         if (_left && _right)
